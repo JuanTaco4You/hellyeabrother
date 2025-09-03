@@ -1,61 +1,65 @@
 # Solana Telegram Signal Trading Bot
 
-## Personal Trading Bot, not public
+Automated Solana token trader that listens to Telegram channels or group messages and executes swaps on Raydium. Supports manual buys, auto buys from chat messages and automated sells based on price targets. A help command shows wallet balances and token holdings.
 
-## Trading Stratergy
+## Quick Start
 
-![Stratergy](/assets/Stratergy.png)
+```bash
+# clone repository
+git clone <repo-url>
+cd hellyeabrother
 
-## Realtime-Monitor Channel
+# install dependencies
+yarn install
 
-* **Channel Link** = https://t.me/Maestrosdegen
+# copy environment template
+cp test.env_example.2.txt.txt .env
 
-* **Maestrosdegen Telegram Signal Channel for realtime monitoring**
+# edit .env and src/config.ts as described below
 
-![Monitorchannel](/assets/Monitor.png)
+# build typescript
+yarn build
 
-* we need to distinct solana token address and ethereum token address, etc.
+# start bot
+yarn start
+```
 
-## Buy and Sell Criteria
+## Configuration
 
-**I want an automated trading bot on solana, raydium with some criteria:**
+### Environment Variables (`.env`)
+- `TELEGRAM_TOKEN` – token from BotFather.
+- `TELEGRAM_CHANNEL` – public channel username (e.g. `@YourPublicChannel` or `https://t.me/YourPublicChannel`). If empty and `TELEGRAM_GROUP_ID` is set, Auto Buy listens to messages in that chat.
+- `TELEGRAM_GROUP_ID` – numeric chat ID to restrict bot interaction.
+- `RPC_URL` – Solana RPC endpoint.
+- `WEBSOCKET_URL` – websocket endpoint for the RPC provider.
+- `FALCONHIT_API_KEY`, `MORALIS_API_KEY`, `BITQUERY_V2_TOKEN`, `BITQUERY_V1_TOKEN` – API keys for price data providers.
 
-* (-) input data: (to buy)
-* (+) solana contract from a telegram channel or group ID
-* (+) solana contract from data.txt file
-* (-) result:
-* (+) Instantly buy tokens
-* (+) Sell: setup take profit 1, take profit 2, loss
-* (-) options:
-* (+) Jito fee
-* (+) min and max LQ
-* (+) Slippage
+### Local Settings (`src/config.ts`)
+- `solanaWallets` – array of base58‑encoded private keys used for trading.
+- `solBuyAmountRange` – `[min, max]` random SOL amount for Auto Buy.
+- `priceFactor` – multiples used to trigger auto sells.
+- `sellInternalDuration` – interval in milliseconds between sell checks.
 
-# Telegram Tokens, RPC_node,  Required APIs
+## Usage
 
-* **TELEGRAM_TOKEN**='...'
-* **TELEGRAM_CHANNEL**='@YourPublicChannel' or 'https://t.me/YourPublicChannel'
-  - Note: telegram-scraper requires a public channel username. Numeric chat IDs like '-4798590389' are not supported for scraping.
-* **TELEGRAM_GROUP_ID**='-4798590389'
-  - Optional: restricts bot interactions to this chat ID.
-  - If `TELEGRAM_CHANNEL` is empty and `TELEGRAM_GROUP_ID` is set, Auto Buy listens to messages in this chat and buys when a valid Solana mint address appears.
+1. Open Telegram and send `/start` to your bot.
+2. Use the inline buttons:
+   - **🛒 Buy** → choose **Manual Buy** or **Auto Buy**.
+     - Manual Buy: enter the SOL amount then the token mint address.
+     - Auto Buy: when enabled, the bot scans chat messages for Solana addresses and buys random amounts within `solBuyAmountRange`.
+   - **📈 Sell** – run periodic sell checks for positions saved in `trading.db`.
+   - **💼 Help** – view balances and SPL token holdings for configured wallets.
+   - **🛒 Stop Trading** – stop auto or manual trading.
+3. Auto sell executes based on price targets and updates the database.
 
-* **RPC_URL**='https://mainnet.helius-rpc.com/?api-key=12e48098-...'
-* **WEBSOCKET_URL** = "wss://mainnet.helius-rpc.com/?api-key=12e48098-..."
+## Notes
 
-* **FALCONHIT_API_KEY**=""
-* **MORALIS_API_KEY**=""
-* **BITQUERY_V2_TOKEN**=""
-* **BITQUERY_V1_TOKEN**=""
+- Only valid Solana token addresses are accepted.
+- Swaps are executed on Raydium using the configured wallets.
+- Price data is fetched from Bitquery with Moralis fallback.
+- Logs are written to the `logs/` directory.
 
-## Install and Working
+## License
 
-1. **yarn install**
-2. **yarn start**
-3. Find **@tank_...** (in Telegram)
-4. **/start** (Telegram)
-5. selection buttons ...
+ISC
 
-## working process
-
-![working process](/assets/Trading_Process.png)
