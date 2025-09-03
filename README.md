@@ -32,7 +32,7 @@ yarn start
 - `TELEGRAM_GROUP_ID` – numeric chat ID to restrict bot interaction.
 - `RPC_URL` – Solana RPC endpoint.
 - `WEBSOCKET_URL` – websocket endpoint for the RPC provider.
-- `FALCONHIT_API_KEY`, `MORALIS_API_KEY` – API keys for pool data and token prices.
+- `FALCONHIT_API_KEY`, `MORALIS_API_KEY`, `BITQUERY_V2_TOKEN`, `BITQUERY_V1_TOKEN` – API keys for price data providers.
 
 ### Local Settings (`src/config.ts`)
 - `solanaWallets` – array of base58‑encoded private keys used for trading.
@@ -56,7 +56,7 @@ yarn start
 
 - Only valid Solana token addresses are accepted.
 - Swaps are executed on Raydium using the configured wallets.
-- Price data is fetched from Moralis.
+- Price data is fetched from Bitquery with Moralis fallback.
 - Logs are written to the `logs/` directory.
 
 ## License
