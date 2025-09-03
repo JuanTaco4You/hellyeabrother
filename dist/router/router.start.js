@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const startTrade_1 = require("../startTrade");
-const config_1 = require("../config");
+const db_1 = require("../util/db");
 const helper_1 = require("../util/helper");
+const config_1 = require("../config");
+const helper_2 = require("../util/helper");
 const config_2 = require("../config");
 const types_1 = require("../util/types");
 const web3_js_1 = require("@solana/web3.js");
@@ -17,6 +19,8 @@ const logger_1 = require("../util/logger");
 const startRouter = (bot) => {
     // Session state for each chat
     const sessions = {};
+    // Dashboard state per chat
+    const dashboards = {};
     let globalChatId;
     let autoBuyEnabled = false; // toggled by UI
     const log = (0, logger_1.childLogger)(logger_1.appLogger, 'Router');
@@ -43,6 +47,8 @@ const startRouter = (bot) => {
         reply_markup: {
             inline_keyboard: [
                 [{ text: "🛒 Buy", callback_data: "buy" }, { text: "📈 Sell", callback_data: "sell" }],
+                [{ text: "▶️ Execute Buy Cycle", callback_data: "exec_buy_cycle" }, { text: "⏩ Execute Sell Cycle", callback_data: "exec_sell_cycle" }],
+                [{ text: "📊 Live Dashboard", callback_data: "live_dashboard" }],
                 channelUrl
                     ? [{ text: "💼 Help", callback_data: "help" }, { text: "📬 Channel", url: channelUrl }]
                     : [{ text: "💼 Help", callback_data: "help" }]
@@ -54,6 +60,14 @@ const startRouter = (bot) => {
             inline_keyboard: [
                 [{ text: "🛒 Manual Buy", callback_data: "manual_buy" }],
                 [{ text: "🚀 Auto Buy", callback_data: "auto_buy" }]
+            ],
+        },
+    };
+    const selectedSellOptions = {
+        reply_markup: {
+            inline_keyboard: [
+                [{ text: "📈 Manual Sell", callback_data: "manual_sell" }],
+                [{ text: "⏩ Execute Sell Cycle", callback_data: "exec_sell_cycle" }]
             ],
         },
     };
@@ -79,6 +93,7 @@ const startRouter = (bot) => {
         bot.sendMessage(chatId, welcomeMessage, options);
     });
     bot.on("callback_query", async (callbackQuery) => {
+        var _a;
         const message = callbackQuery.message;
         const category = callbackQuery.data;
         const chatId = message.chat.id;
@@ -94,10 +109,21 @@ const startRouter = (bot) => {
             log.info("Buy menu opened", { chatId });
             bot.sendMessage(chatId, "🏆 Choose your buy method:                  ", selectedBuyOptions);
         }
+        else if (category === "sell") {
+            log.info("Sell menu opened", { chatId });
+            bot.sendMessage(chatId, "📈 Choose your sell method:", selectedSellOptions);
+        }
         else if (category === "manual_buy") {
             sessions[chatId].waitingForAmount = true;
+            sessions[chatId].mode = 'manual_buy';
             log.info("Manual buy flow started", { chatId });
             bot.sendMessage(chatId, "✍ Input the amount you want to buy ...  (sol)     \n⚱️  For example: 1.25                      ");
+        }
+        else if (category === "manual_sell") {
+            sessions[chatId].waitingForSellPercent = true;
+            sessions[chatId].mode = 'manual_sell';
+            log.info("Manual sell flow started", { chatId });
+            bot.sendMessage(chatId, "✍ Input the percent you want to sell ... (e.g., 50 or 100)");
         }
         else if (category === "auto_buy") {
             autoBuyEnabled = true;
@@ -112,6 +138,75 @@ const startRouter = (bot) => {
             clearInterval(tokenSellInterval);
             log.info("Auto/Manual trading stopped", { chatId });
             bot.sendMessage(chatId, "🏆 Choose your buy method:                  ", selectedBuyOptions);
+        }
+        else if (category === "exec_buy_cycle") {
+            log.info("Execute buy cycle triggered", { chatId });
+            await bot.sendMessage(chatId, "Starting buy cycle...\nThis processes queued buy signals.");
+            await (0, startTrade_1.tokenBuy)();
+            await bot.sendMessage(chatId, "Buy cycle completed.");
+        }
+        else if (category === "exec_sell_cycle") {
+            log.info("Execute sell cycle triggered", { chatId });
+            await bot.sendMessage(chatId, "Starting sell cycle...\nThis processes eligible sells from DB.");
+            await (0, startTrade_1.tokenSell)();
+            await bot.sendMessage(chatId, "Sell cycle completed.");
+        }
+        else if (category === "live_dashboard") {
+            try {
+                // Start or toggle the live dashboard
+                if ((_a = dashboards[chatId]) === null || _a === void 0 ? void 0 : _a.interval) {
+                    clearInterval(dashboards[chatId].interval);
+                }
+                const sent = await bot.sendMessage(chatId, "📊 Initializing live dashboard...", {
+                    reply_markup: {
+                        inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]]
+                    }
+                });
+                const messageId = sent.message_id;
+                const render = async () => {
+                    var _a;
+                    try {
+                        const buys = await (0, db_1.getSolanaBuys)();
+                        if (!buys || buys.length === 0) {
+                            await bot.editMessageText("📊 No open positions in DB.", { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
+                            return;
+                        }
+                        const lines = [];
+                        lines.push("📊 Live Positions (updates ~4s)\n");
+                        // Fetch prices sequentially to avoid rate-limit spikes
+                        for (const row of buys) {
+                            const token = row.contractAddress;
+                            const p = await (0, helper_1.getSolanaTokenPriceBitquery)(token).catch(() => ({ usdPrice: undefined }));
+                            const cur = p === null || p === void 0 ? void 0 : p.usdPrice;
+                            const entry = row.purchasedPrice;
+                            const pnl = cur && entry ? ((cur - entry) / entry) * 100 : undefined;
+                            const pf = row.priceFactor;
+                            lines.push(`• ${token}\n  entry: $${((_a = entry === null || entry === void 0 ? void 0 : entry.toFixed) === null || _a === void 0 ? void 0 : _a.call(entry, 6)) || entry} | cur: ${cur ? `$${cur.toFixed(6)}` : 'n/a'} | pnl: ${pnl != null ? pnl.toFixed(2) + '%' : 'n/a'} | pf: ${pf}`);
+                        }
+                        let text = lines.join("\n");
+                        if (text.length > 3900)
+                            text = text.slice(0, 3900) + "\n...";
+                        await bot.editMessageText(text, { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
+                    }
+                    catch (e) {
+                        log.error("Dashboard render error", e);
+                    }
+                };
+                await render();
+                const interval = setInterval(render, 4000);
+                dashboards[chatId] = { interval, messageId };
+            }
+            catch (e) {
+                log.error("Live dashboard error", e);
+                await bot.sendMessage(chatId, `Failed to start dashboard: ${e}`);
+            }
+        }
+        else if (category === "stop_dashboard") {
+            const d = dashboards[chatId];
+            if (d === null || d === void 0 ? void 0 : d.interval)
+                clearInterval(d.interval);
+            dashboards[chatId] = undefined;
+            await bot.sendMessage(chatId, "🛑 Dashboard stopped.");
         }
         else if (category === "help") {
             try {
@@ -207,6 +302,42 @@ const startRouter = (bot) => {
                 bot.sendMessage(chatId, "Invalid amount. Please enter a valid number.");
             }
         }
+        else if (session.waitingForSellAddress) {
+            const tokenAddress = msg.text.trim();
+            if (tokenAddress) {
+                session.waitingForSellAddress = false;
+                log.info("Manual sell token address entered", { chatId, tokenAddress });
+                await bot.sendMessage(chatId, `👌 Sell setup:\n\n📉 Percent: ${session.sellPercent}%\n🤝 Token Address: ${tokenAddress}`);
+                if ((0, startTrade_1.createSignal)(tokenAddress, session.sellPercent, 'sell')) {
+                    tlog.info("Manual sell signal created", { tokenAddress, percent: session.sellPercent });
+                    await (0, startTrade_1.runTrade)({
+                        id: Date.now(),
+                        contractAddress: tokenAddress,
+                        action: 'sell',
+                        amount: String(session.sellPercent),
+                        platform: 'raydium',
+                        chain: 'solana',
+                        timestamp: new Date().toISOString()
+                    }, 0);
+                }
+                await bot.sendMessage(chatId, "📈 Choose your sell method:", selectedSellOptions);
+                await bot.sendMessage(chatId, "Sell signal executed.");
+                delete sessions[chatId];
+            }
+        }
+        else if (session.waitingForSellPercent) {
+            const percent = parseFloat(msg.text);
+            if (!isNaN(percent) && percent > 0 && percent <= 100) {
+                session.sellPercent = percent;
+                session.waitingForSellPercent = false;
+                session.waitingForSellAddress = true;
+                log.info("Manual sell percent entered", { chatId, percent });
+                bot.sendMessage(chatId, "🧧 Input the token address you want to sell ...  (sol mint)");
+            }
+            else {
+                bot.sendMessage(chatId, "Invalid percent. Enter a number between 1 and 100.");
+            }
+        }
         else if (autoBuyEnabled && typeof msg.text === 'string' && msg.text.trim().length > 0) {
             // Auto Buy mode: parse incoming message for Solana token addresses and buy
             const text = msg.text;
@@ -214,7 +345,7 @@ const startRouter = (bot) => {
             const base58Regex = /^[1-9A-HJ-NP-Za-km-z]+$/;
             const candidates = parts.filter(p => p.length >= 32 && p.length <= 44 && base58Regex.test(p));
             for (const candidate of candidates) {
-                const kind = (0, helper_1.verifyAddress)(candidate);
+                const kind = (0, helper_2.verifyAddress)(candidate);
                 if (kind === types_1.addressType.SOLANA) {
                     // Detect SELL intent
                     const lowered = text.toLowerCase();
@@ -235,7 +366,7 @@ const startRouter = (bot) => {
                         break;
                     }
                     else {
-                        const amount = (0, helper_1.getRandomArbitrary)(config_2.solBuyAmountRange[0], config_2.solBuyAmountRange[1]);
+                        const amount = (0, helper_2.getRandomArbitrary)(config_2.solBuyAmountRange[0], config_2.solBuyAmountRange[1]);
                         if ((0, startTrade_1.createSignal)(candidate, amount, 'buy')) {
                             tlog.info("Auto Buy triggered", { token: candidate, amount });
                             await (0, startTrade_1.tokenBuy)();

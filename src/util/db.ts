@@ -198,6 +198,55 @@ export const updateSells = async () => {
 
 
 
+// Danger: delete all buy rows
+export const clearAllBuys = async () => {
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM buys", [], function (err) {
+            if (err) {
+                childLogger(appLogger, 'DB').error('Clear all buys error', err);
+                reject(err);
+            } else {
+                childLogger(appLogger, 'DB').info(`Cleared buys table, rows affected: ${this.changes}`);
+                resolve(this.changes);
+            }
+        });
+    });
+}
+
+// Delete buys whose contractAddress is NOT in the provided list
+export const clearBuysNotIn = async (mints: string[]) => {
+    return new Promise((resolve, reject) => {
+        try {
+            if (!Array.isArray(mints) || mints.length === 0) {
+                // If nothing is held, delete all rows (all are non-held)
+                db.run("DELETE FROM buys", [], function (err) {
+                    if (err) {
+                        childLogger(appLogger, 'DB').error('Clear non-held (all) error', err);
+                        return reject(err);
+                    }
+                    childLogger(appLogger, 'DB').info(`Cleared non-held buys (all), rows affected: ${this.changes}`);
+                    resolve(this.changes);
+                });
+                return;
+            }
+
+            const placeholders = mints.map(() => '?').join(',');
+            const sql = `DELETE FROM buys WHERE contractAddress NOT IN (${placeholders})`;
+            db.run(sql, mints, function (err) {
+                if (err) {
+                    childLogger(appLogger, 'DB').error('Clear non-held buys error', err);
+                    reject(err);
+                } else {
+                    childLogger(appLogger, 'DB').info(`Cleared non-held buys, rows affected: ${this.changes}`);
+                    resolve(this.changes);
+                }
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
   
 
   
