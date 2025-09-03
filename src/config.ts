@@ -10,7 +10,18 @@ export const priceFactor: number[] =  [0.01, 2, 10];
 const RPC_URL: string = process.env.RPC_URL as string; // ENTER YOUR RPC
 const WEBSOCKET_URL: string = process.env.WEBSOCKET_URL as string;
 
+export const connection = new Connection(RPC_URL, { wsEndpoint: WEBSOCKET_URL, confirmTransactionInitialTimeout: 30000, commitment: 'confirmed' })
 
-export const connection = new Connection(RPC_URL, { wsEndpoint: WEBSOCKET_URL, confirmTransactionInitialTimeout: 30000, commitment: 'confirmed' }) 
-export const solanaWallets: string[] = [""];
+// Load Solana wallet(s) from environment
+// Preferred: `SOLANA_WALLETS` as a comma-separated list of base58 secret keys
+// Fallback: single `SOL_PRIVATE_KEY` or `WALLET_PRIVATE_KEY`
+const envWallets = (process.env.SOLANA_WALLETS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 
+const singleWallet = (process.env.SOL_PRIVATE_KEY || process.env.WALLET_PRIVATE_KEY || "").trim();
+
+export const solanaWallets: string[] = envWallets.length > 0
+  ? envWallets
+  : (singleWallet ? [singleWallet] : []);

@@ -28,6 +28,10 @@ const raydiumSwap = async (signal: signal, sell: boolean = false, signalNumber: 
 
   try {
     const tlog = childLogger(tradeLogger, 'Raydium');
+    if (!solanaWallets[0]) {
+      tlog.error("No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env");
+      return;
+    }
     const raydiumSwap = new RaydiumSwap(solanaWallets[0]);
     tlog.info(`Raydium swap initialized`);
     let tokenAAddress: string;
