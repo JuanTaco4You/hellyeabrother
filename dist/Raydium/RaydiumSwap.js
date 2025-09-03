@@ -10,6 +10,7 @@ const anchor_1 = require("@coral-xyz/anchor");
 const bs58_1 = __importDefault(require("bs58"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const logger_1 = require("../util/logger");
 const FALCONHIT_API_KEY = process.env.FALCONHIT_API_KEY;
 const config_1 = require("../config");
 const helper_1 = require("../util/helper");
@@ -23,7 +24,7 @@ class RaydiumSwap {
     */
     constructor(WALLET_PRIVATE_KEY) {
         this.wallet = new anchor_1.Wallet(web3_js_1.Keypair.fromSecretKey(Uint8Array.from(bs58_1.default.decode(WALLET_PRIVATE_KEY))));
-        console.log("wallet", this.wallet.publicKey);
+        (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').info("Wallet initialized", { publicKey: this.wallet.publicKey.toBase58() });
         this.wallet.payer;
     }
     /**
@@ -34,7 +35,7 @@ class RaydiumSwap {
      * @returns {LiquidityPoolKeys | null}
      */
     async getPoolInfoByTokenPair(mintA, mintB) {
-        console.log("Falconhit api key", FALCONHIT_API_KEY);
+        (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').debug("Falconhit api key present", { present: Boolean(FALCONHIT_API_KEY) });
         for (let i = 0; i < 3; i++) {
             try {
                 const response = await axios_1.default.get(`https://valguibs.com/api/pool/pair/${mintA}/${mintB}`, {
@@ -42,7 +43,7 @@ class RaydiumSwap {
                         Authorization: FALCONHIT_API_KEY
                     }
                 });
-                console.log(response.data);
+                (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').debug("pool pair response", response.data);
                 const poolInfoData = {
                     id: new web3_js_1.PublicKey(response.data[0].id),
                     baseMint: new web3_js_1.PublicKey(response.data[0].baseMint),
@@ -75,7 +76,7 @@ class RaydiumSwap {
             }
             catch (err) {
                 await (0, helper_1.Delay)(1000);
-                console.error("get Pool info", err);
+                (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').error("get Pool info", err);
             }
         }
     }
@@ -168,7 +169,7 @@ class RaydiumSwap {
         if (confirmation.value.err) {
             throw new Error("   ❌ - Transaction not confirmed.");
         }
-        console.log('🎉 Transaction Succesfully Confirmed!', '\n', `https://solscan.io/tx/${txid}`);
+        (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').info('Transaction confirmed', { url: `https://solscan.io/tx/${txid}` });
         return true;
     }
     /**

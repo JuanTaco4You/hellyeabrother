@@ -1,0 +1,14 @@
+[2025-09-03T16:57:44.521Z] [INFO] [APP] Bootstrap: Bot token loaded
+[2025-09-03T16:57:46.870Z] [INFO] [APP] Bootstrap: Starting Telegram bot router
+[2025-09-03T16:57:46.875Z] [INFO] [APP] Bootstrap: Moralis started
+[2025-09-03T16:57:46.887Z] [INFO] [APP] DB: Connected to SQLite database
+[2025-09-03T16:57:48.016Z] [INFO] [APP] Router: /start received {"chatId":-4798590389}
+[2025-09-03T16:57:55.652Z] [INFO] [APP] Router: Buy menu opened {"chatId":-4798590389}
+[2025-09-03T16:58:18.459Z] [INFO] [APP] Router: Auto Buy enabled {"chatId":-4798590389}
+[2025-09-03T17:50:32.740Z] [INFO] [APP] Bootstrap: Bot token loaded
+[2025-09-03T17:50:35.174Z] [INFO] [APP] Bootstrap: Starting Telegram bot router
+[2025-09-03T17:50:35.189Z] [INFO] [APP] Bootstrap: Moralis started
+[2025-09-03T17:50:35.190Z] [INFO] [APP] DB: Connected to SQLite database
+[2025-09-03T17:50:43.329Z] [INFO] [APP] Router: /start received {"chatId":-4798590389}
+[2025-09-03T17:50:48.243Z] [INFO] [APP] Router: Buy menu opened {"chatId":-4798590389}
+[2025-09-03T17:50:49.851Z] [INFO] [APP] Router: Auto Buy enabled {"chatId":-4798590389}

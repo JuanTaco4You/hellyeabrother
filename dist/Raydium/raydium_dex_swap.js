@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.swap = exports.sendAndConfirmTransaction = exports.getPubkeyFromStr = exports.sleep = void 0;
 const anchor_1 = require("@project-serum/anchor");
@@ -7,8 +10,20 @@ const raydium_sdk_1 = require("@raydium-io/raydium-sdk");
 const spl_token_1 = require("@solana/spl-token");
 const anchor_2 = require("@project-serum/anchor");
 const bigint_buffer_1 = require("bigint-buffer");
-const log = console.log;
-const solanaConnection = new web3_js_1.Connection(RPC_ENDPOINT, { wsEndpoint: WEBSOCKET_ENDPOINT, confirmTransactionInitialTimeout: 30000, commitment: "confirmed" });
+const dotenv_1 = __importDefault(require("dotenv"));
+const logger_1 = require("../util/logger");
+dotenv_1.default.config();
+const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumDEX');
+const log = (...args) => tlog.debug('log', args);
+// Configure RPC endpoints from env with sensible defaults
+const RPC_ENDPOINT = process.env.RPC_URL || "https://api.mainnet-beta.solana.com";
+const WEBSOCKET_ENDPOINT = process.env.WEBSOCKET_URL || undefined;
+const DEV_NET_RPC = "https://api.devnet.solana.com";
+const solanaConnection = new web3_js_1.Connection(RPC_ENDPOINT, {
+    wsEndpoint: WEBSOCKET_ENDPOINT,
+    confirmTransactionInitialTimeout: 30000,
+    commitment: "confirmed",
+});
 const devConnection = new web3_js_1.Connection(DEV_NET_RPC);
 class BaseRay {
     constructor(input) {
@@ -202,10 +217,11 @@ class BaseRay {
         };
     }
     async buyFromPool(input) {
+        var _a, _b, _c, _d;
         this.reInit();
         const { amountIn, amountOut, poolKeys, user, fixedSide, tokenAccountIn, tokenAccountOut } = input;
         const inToken = amountIn.token.mint;
-        console.log('-------------------', inToken, tokenAccountIn, tokenAccountOut);
+        tlog.debug('token accounts', { inToken: inToken.toBase58(), tokenAccountIn: (_b = (_a = tokenAccountIn.toBase58) === null || _a === void 0 ? void 0 : _a.call(tokenAccountIn)) !== null && _b !== void 0 ? _b : String(tokenAccountIn), tokenAccountOut: (_d = (_c = tokenAccountOut.toBase58) === null || _c === void 0 ? void 0 : _c.call(tokenAccountOut)) !== null && _d !== void 0 ? _d : String(tokenAccountOut) });
         if (inToken.toBase58() == spl_token_1.NATIVE_MINT.toBase58()) {
             let lamports = BigInt(amountIn.raw.toNumber());
             const sendSolIx = anchor_1.web3.SystemProgram.transfer({
@@ -240,7 +256,7 @@ class BaseRay {
         }).compileToV0Message();
         const mainTx = new anchor_1.web3.VersionedTransaction(message);
         const buysimRes = (await this.connection.simulateTransaction(mainTx));
-        console.log('inner buy', buysimRes);
+        tlog.debug('inner buy simulation', buysimRes);
         if (rayIxs.signers)
             mainTx.signatures.push(...rayIxs.signers);
         return {
@@ -304,7 +320,7 @@ async function swap(input) {
     if (!swapAmountInfo)
         return { Err: "failed to calculate the amount" };
     const { amountIn, amountOut, fixedSide, tokenAccountIn, tokenAccountOut, } = swapAmountInfo;
-    console.log('swapAmountInfo', { amountIn, amountOut, fixedSide, tokenAccountIn, tokenAccountOut, });
+    tlog.debug('swapAmountInfo', { amountIn, amountOut, fixedSide, tokenAccountIn, tokenAccountOut, });
     const txInfo = await baseRay.buyFromPool({ amountIn, amountOut, fixedSide, poolKeys, tokenAccountIn, tokenAccountOut, user }).catch(buyFromPoolError => { log({ buyFromPoolError }); return null; });
     if (!txInfo)
         return { Err: "failed to prepare swap transaction" };
@@ -317,7 +333,7 @@ async function swap(input) {
     const tx = new anchor_1.web3.VersionedTransaction(txMsg);
     tx.sign([input.keypair, ...txInfo.signers]);
     const buysimRes = (await connection.simulateTransaction(tx));
-    console.log('tx handler buy sim res', buysimRes);
+    tlog.debug('tx handler buy sim res', buysimRes);
     const txSignature = await sendAndConfirmTransaction(tx, connection).catch((sendAndConfirmTransactionError) => {
         log({ sendAndConfirmTransactionError });
         return null;

@@ -5,8 +5,13 @@ import { Market as RayMarket, Liquidity, LIQUIDITY_STATE_LAYOUT_V4, LiquidityPoo
 import { AccountLayout, MintLayout, NATIVE_MINT, TOKEN_PROGRAM_ID, createAssociatedTokenAccountInstruction, getAssociatedTokenAddressSync, createAssociatedTokenAccountIdempotentInstruction, createCloseAccountInstruction,createSyncNativeInstruction } from "@solana/spl-token";
 import { BN } from '@project-serum/anchor'
 import { toBufferBE } from "bigint-buffer";
+import dotenv from "dotenv";
+import { tradeLogger, childLogger } from "../util/logger";
 
-const log = console.log;
+dotenv.config();
+
+const tlog = childLogger(tradeLogger, 'RaydiumDEX');
+const log = (...args: any[]) => tlog.debug('log', args);
 
 type Result<T, E = any | undefined> = {
     Ok?: T,
@@ -48,7 +53,16 @@ type BaseRayInput = {
     rpcEndpointUrl: string
 }
 
-const solanaConnection = new Connection(RPC_ENDPOINT, { wsEndpoint: WEBSOCKET_ENDPOINT, confirmTransactionInitialTimeout: 30000, commitment: "confirmed" });
+// Configure RPC endpoints from env with sensible defaults
+const RPC_ENDPOINT: string = (process.env.RPC_URL as string) || "https://api.mainnet-beta.solana.com";
+const WEBSOCKET_ENDPOINT: string | undefined = (process.env.WEBSOCKET_URL as string) || undefined;
+const DEV_NET_RPC: string = "https://api.devnet.solana.com";
+
+const solanaConnection = new Connection(RPC_ENDPOINT, {
+    wsEndpoint: WEBSOCKET_ENDPOINT,
+    confirmTransactionInitialTimeout: 30000,
+    commitment: "confirmed",
+});
 const devConnection = new Connection(DEV_NET_RPC);
 
 class BaseRay {
@@ -270,7 +284,7 @@ class BaseRay {
         const { amountIn, amountOut, poolKeys, user, fixedSide, tokenAccountIn, tokenAccountOut } = input
 
         const inToken = (amountIn as TokenAmount).token.mint;
-        console.log('-------------------', inToken, tokenAccountIn, tokenAccountOut)
+        tlog.debug('token accounts', { inToken: inToken.toBase58(), tokenAccountIn: tokenAccountIn.toBase58?.() ?? String(tokenAccountIn), tokenAccountOut: tokenAccountOut.toBase58?.() ?? String(tokenAccountOut) })
         if (inToken.toBase58() == NATIVE_MINT.toBase58()) {
             let lamports = BigInt(amountIn.raw.toNumber())
             const sendSolIx = web3.SystemProgram.transfer({
@@ -318,7 +332,7 @@ class BaseRay {
         }).compileToV0Message()
         const mainTx = new web3.VersionedTransaction(message)
         const buysimRes = (await this.connection.simulateTransaction(mainTx))
-        console.log('inner buy', buysimRes)
+        tlog.debug('inner buy simulation', buysimRes)
         if (rayIxs.signers) mainTx.signatures.push(...rayIxs.signers)
         return {
             ixs: [...this.cacheIxs, ...rayIxs.instructions],
@@ -378,7 +392,7 @@ export async function swap(input: SwapInput): Promise<Result<{ txSignature: stri
     if (!swapAmountInfo) return { Err: "failed to calculate the amount" }
 
     const { amountIn, amountOut, fixedSide, tokenAccountIn, tokenAccountOut, } = swapAmountInfo
-    console.log('swapAmountInfo', { amountIn, amountOut, fixedSide, tokenAccountIn, tokenAccountOut, })
+    tlog.debug('swapAmountInfo', { amountIn, amountOut, fixedSide, tokenAccountIn, tokenAccountOut, })
 
     const txInfo = await baseRay.buyFromPool({ amountIn, amountOut, fixedSide, poolKeys, tokenAccountIn, tokenAccountOut, user }).catch(buyFromPoolError => { log({ buyFromPoolError }); return null })
     if (!txInfo) return { Err: "failed to prepare swap transaction" }
@@ -391,7 +405,7 @@ export async function swap(input: SwapInput): Promise<Result<{ txSignature: stri
     const tx = new web3.VersionedTransaction(txMsg)
     tx.sign([input.keypair, ...txInfo.signers])
     const buysimRes = (await connection.simulateTransaction(tx))
-    console.log('tx handler buy sim res', buysimRes)
+    tlog.debug('tx handler buy sim res', buysimRes)
     const txSignature = await sendAndConfirmTransaction(tx, connection).catch((sendAndConfirmTransactionError) => {
         log({ sendAndConfirmTransactionError })
         return null

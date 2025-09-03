@@ -3,6 +3,7 @@ import { addressType, signal } from "./types";
 import Moralis from "moralis";
 import axios from 'axios';
 import dotenv from "dotenv";
+import { appLogger, tradeLogger, childLogger } from "./logger";
 dotenv.config();
 
 import { priceFactor, connection } from "../config";
@@ -12,6 +13,7 @@ import bs58 from "bs58";
 const MORALIS_API_KEY = process.env.MORALIS_API_KEY;
 const BITQUERY_V2_TOKEN = process.env.BITQUERY_V2_TOKEN;
 const BITQUERY_V1_TOKEN = process.env.BITQUERY_V1_TOKEN;
+const PRICE_PROVIDER = (process.env.PRICE_PROVIDER || 'auto').toLowerCase();
 
 
 
@@ -44,8 +46,8 @@ export const MoralisStart = async () => {
 }
 
 export const getSolanaTokenPrice = async (address: string) => {
-    Delay(200);
-    console.log("token mint address", address)
+    await Delay(200);
+    childLogger(tradeLogger, 'Price').debug("token mint address", { address })
     for (let i = 0; i < 5; i++) {
         try {
             const response = await Moralis.SolApi.token.getTokenPrice({
@@ -54,55 +56,79 @@ export const getSolanaTokenPrice = async (address: string) => {
             });
             if (response.raw) return response.raw;    
         } catch(err) {
-            Delay(1000);
-            console.error("solana token price", err);
+            await Delay(1000);
+            childLogger(tradeLogger, 'Price').error("solana token price", err);
         }
     }
 }
 
 export const getSolanaTokenPriceBitquery = async (address: string) => {
-    Delay(200);
-    console.log("token mint address", address)
-    let data = JSON.stringify({
-        "query": `{
-            Solana {
-            DEXTradeByTokens(
-                where: {Trade: {Currency: {MintAddress: {is: "${address}"}}}}
-                orderBy: {descending: Trade_Side_Currency_Decimals}
-                limit: {count: 1}
-            ) {
-                Trade {
-                PriceInUSD
-                }
-            }
-            }
-        }`,
-        "variables": "{}"
-    });
-    let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://streaming.bitquery.io/eap',
-        headers: { 
-            'Content-Type': 'application/json', 
-            'X-API-KEY': BITQUERY_V1_TOKEN, 
-            'Authorization': `Bearer ${BITQUERY_V2_TOKEN}`
-        },
-        data : data
+    // Allow opting out of Bitquery entirely
+    if (PRICE_PROVIDER === 'moralis') {
+      const m = await getSolanaTokenPrice(address);
+      return { usdPrice: (m as any)?.usdPrice };
+    }
+    await Delay(200);
+    childLogger(tradeLogger, 'Price').debug("token mint address", { address })
+
+    const query = `{
+      Solana {
+        DEXTradeByTokens(
+          where: {Trade: {Currency: {MintAddress: {is: "${address}"}}}}
+          orderBy: {descending: Trade_Side_Currency_Decimals}
+          limit: {count: 1}
+        ) { Trade { PriceInUSD } }
+      }
+    }`;
+
+    const useEap = Boolean(BITQUERY_V1_TOKEN && BITQUERY_V2_TOKEN && BITQUERY_V1_TOKEN !== '...' && BITQUERY_V2_TOKEN !== '...')
+    const url = useEap ? 'https://streaming.bitquery.io/eap' : 'https://graphql.bitquery.io';
+    const headers: any = {
+      'Content-Type': 'application/json',
     };
-  
+    if (BITQUERY_V1_TOKEN && BITQUERY_V1_TOKEN !== '...') headers['X-API-KEY'] = BITQUERY_V1_TOKEN;
+    if (useEap) headers['Authorization'] = `Bearer ${BITQUERY_V2_TOKEN}`;
+
+    const config = {
+      method: 'post' as const,
+      maxBodyLength: Infinity,
+      url,
+      headers,
+      data: JSON.stringify({ query, variables: '{}' }),
+    };
+
     for (let i = 0; i < 5; i++) {
       try {
         const response = await axios.request(config);
-        console.log(JSON.stringify(response.data));
-        return {
-          usdPrice: response.data.data.Solana.DEXTradeByTokens[0].Trade.PriceInUSD
+        childLogger(tradeLogger, 'Price').debug("bitquery response", response.data);
+        const price = response?.data?.data?.Solana?.DEXTradeByTokens?.[0]?.Trade?.PriceInUSD;
+        if (price != null) {
+          return { usdPrice: price };
+        } else {
+          childLogger(tradeLogger, 'Price').warn("Bitquery: no DEX price for token", { address });
         }
-      } catch (err) {
-          Delay(1000);
-          console.log("getting token price on Raydium error");
+      } catch (err: any) {
+        const status = err?.response?.status;
+        const msg = err?.response?.data || err?.message;
+        childLogger(tradeLogger, 'Price').warn("Bitquery price fetch error", { address, status, msg });
       }
+      await Delay(1000);
     }
+
+    // Fallback to Moralis if Bitquery failed
+    try {
+      const m = await getSolanaTokenPrice(address);
+      const usdPrice = (m as any)?.usdPrice;
+      if (usdPrice != null) {
+        childLogger(tradeLogger, 'Price').info("Fallback: Moralis price used", { address, usdPrice });
+        return { usdPrice };
+      }
+    } catch (err) {
+      childLogger(tradeLogger, 'Price').warn("Moralis fallback failed", { address });
+    }
+
+    // Final: return a shaped object to avoid spread errors upstream
+    return { usdPrice: undefined as unknown as number } as any;
 }
 
 export const convertAsSignal = async (histories: any, solana = false) => {
@@ -114,7 +140,7 @@ export const convertAsSignal = async (histories: any, solana = false) => {
             }
         }).flat();
         const uniqueData: any = [...new Set(data)];
-        console.log("unique data", uniqueData);
+        childLogger(tradeLogger, 'Signals').debug("unique data", uniqueData);
         const newPrice: any = []
         let priceResult = []
      
@@ -125,17 +151,19 @@ export const convertAsSignal = async (histories: any, solana = false) => {
             }
         }
         priceResult.forEach(e => {
-            console.log("tokenAddress", e.tokenAddress.toString().toLowerCase(), "tokenprice", e.usdPrice);
+            childLogger(tradeLogger, 'Signals').debug("token price", { tokenAddress: e.tokenAddress.toString().toLowerCase(), usdPrice: e.usdPrice });
         })
         priceResult.forEach(one => newPrice[one.tokenAddress.toString().toLowerCase()] = one.usdPrice);
     
         const signales: signal[] = [];
         
         histories.forEach((item: any) => {
-            console.log("contract Address => ", item.contractAddress.toLocaleLowerCase(), 
-            "purchase price =>", item.purchasedPrice, 
-            "current price =>", newPrice[item.contractAddress.toLocaleLowerCase()], 
-            "rate =>", newPrice[item.contractAddress.toLocaleLowerCase()] / item.purchasedPrice);
+            childLogger(tradeLogger, 'Signals').debug("price compare", {
+                contractAddress: item.contractAddress.toLocaleLowerCase(),
+                purchasePrice: item.purchasedPrice,
+                currentPrice: newPrice[item.contractAddress.toLocaleLowerCase()],
+                rate: newPrice[item.contractAddress.toLocaleLowerCase()] / item.purchasedPrice
+            });
             if (newPrice[item.contractAddress.toLocaleLowerCase()] != undefined && newPrice[item.contractAddress.toLocaleLowerCase()] >= item.purchasedPrice * priceFactor[item.priceFactor]) {
             if (item.priceFactor == 2) {
                 signales.push({
@@ -164,7 +192,7 @@ export const convertAsSignal = async (histories: any, solana = false) => {
         return signales
     }
     catch (err) {
-      console.error(err)
+      childLogger(tradeLogger, 'Signals').error('convertAsSignal error', err)
       return []
     }
 }
@@ -181,7 +209,7 @@ export const getTokenAccountByOwnerAndMint = async (WALLET_PRIVATE_KEY: string, 
             );
             return accountAddress;
         } catch (err) {
-            console.log("Empyt token account");
+            childLogger(tradeLogger, 'Wallet').warn("Empty token account");
         } 
     }
     return "empty"
@@ -194,4 +222,3 @@ export const getTokenBalance = async (accountAddress: PublicKey) => {
     return balance.value.amount;
 } 
   
-

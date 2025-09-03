@@ -7,16 +7,22 @@ import {
     tokenSell,
     runTrade
 } from "../startTrade";
-import { sellInternalDuration } from "../config";
+import { sellInternalDuration, connection, solanaWallets } from "../config";
 import { verifyAddress, getRandomArbitrary } from "../util/helper";
 import { solBuyAmountRange } from "../config";
 import { addressType } from "../util/types";
+import { Keypair } from "@solana/web3.js";
+import bs58 from "bs58";
+import { TOKEN_PROGRAM_ID } from '@raydium-io/raydium-sdk';
+import { appLogger, tradeLogger, childLogger } from "../util/logger";
 
 const startRouter = (bot: TelegramBot) => {
     // Session state for each chat
     const sessions: any = {};
     let globalChatId: any;
     let autoBuyEnabled = false; // toggled by UI
+    const log = childLogger(appLogger, 'Router');
+    const tlog = childLogger(tradeLogger, 'Router');
 
     // Build channel button URL from env, if a public username is provided
     const envChannel = (process.env.TELEGRAM_CHANNEL || '').trim();
@@ -72,17 +78,18 @@ const startRouter = (bot: TelegramBot) => {
     bot.onText(/\/start/, (msg: any) => {
         const chatId = msg.chat.id;
         if (!isAuthorizedChat(chatId)) return;
-        console.log("chatId", chatId);
+        log.info("/start received", { chatId });
         const welcomeMessage = "🍄 Welcome to my soltank_bot!\n\n`AAEuA3DeoblV-LZQwoexDgWJoM2Tg0-E2Ns                                   `\n\n`https://t.me/mysol_tankbot`\n\n 🥞 Please choose a category below:";
         bot.sendMessage(chatId, welcomeMessage, options);
     });
 
-    bot.on("callback_query", (callbackQuery: any) => {
+    bot.on("callback_query", async (callbackQuery: any) => {
 
         const message = callbackQuery.message;
         const category = callbackQuery.data;
         const chatId = message.chat.id;
-        if (!isAuthorizedChat(chatId)) return;
+        // Allow Help to work regardless of chat restrictions
+        if (!isAuthorizedChat(chatId) && category !== "help") return;
         globalChatId = chatId;
 
         let tokenSellInterval;
@@ -92,12 +99,15 @@ const startRouter = (bot: TelegramBot) => {
         }
 
         if (category === "buy") {
+            log.info("Buy menu opened", { chatId });
             bot.sendMessage(chatId, "🏆 Choose your buy method:                  ", selectedBuyOptions);
         } else if (category === "manual_buy") {
             sessions[chatId].waitingForAmount = true;
+            log.info("Manual buy flow started", { chatId });
             bot.sendMessage(chatId, "✍ Input the amount you want to buy ...  (sol)     \n⚱️  For example: 1.25                      ");
         } else if (category === "auto_buy") {
             autoBuyEnabled = true;
+            log.info("Auto Buy enabled", { chatId });
             bot.sendMessage(chatId, "✍ Auto Buy enabled. Post messages with Solana token addresses in this chat to buy automatically.");
             // Enable periodic sell checks
             clearInterval(tokenSellInterval);
@@ -106,7 +116,61 @@ const startRouter = (bot: TelegramBot) => {
         } else if (category === "stop_buy") {
             autoBuyEnabled = false;
             clearInterval(tokenSellInterval);
+            log.info("Auto/Manual trading stopped", { chatId });
             bot.sendMessage(chatId, "🏆 Choose your buy method:                  ", selectedBuyOptions);
+        } else if (category === "help") {
+            try {
+                log.info("Help requested", { chatId });
+                const wallets = Array.isArray(solanaWallets) ? solanaWallets.filter(w => (w || '').trim().length > 0) : [];
+                if (wallets.length === 0) {
+                    await bot.sendMessage(chatId, "No wallet configured. Please set one or more Solana wallet private keys in config.");
+                    return;
+                }
+
+                for (const pkBase58 of wallets) {
+                    try {
+                        const payer = Keypair.fromSecretKey(Uint8Array.from(bs58.decode(pkBase58.trim())));
+                        const pubkey = payer.publicKey;
+                        const lamports = await connection.getBalance(pubkey);
+                        const sol = lamports / 1e9;
+
+                        const parsed = await connection.getParsedTokenAccountsByOwner(pubkey, { programId: TOKEN_PROGRAM_ID });
+                        const lines: string[] = [];
+                        lines.push(`👛 Wallet: ${pubkey.toBase58()}`);
+                        lines.push(`◎ SOL: ${sol.toFixed(6)}`);
+                        lines.push("");
+                        if (parsed.value.length === 0) {
+                            lines.push("No SPL token positions found.");
+                        } else {
+                            lines.push("SPL Token Positions:");
+                            for (const acc of parsed.value) {
+                                const info: any = acc.account.data.parsed.info;
+                                const mint: string = info.mint;
+                                const amountStr: string = info.tokenAmount.uiAmountString;
+                                lines.push(`- ${mint}: ${amountStr}`);
+                            }
+                        }
+
+                        let buffer = '';
+                        for (const line of lines) {
+                            if ((buffer + line + "\n").length > 3600) {
+                                await bot.sendMessage(chatId, buffer);
+                                buffer = '';
+                            }
+                            buffer += line + "\n";
+                        }
+                        if (buffer.length > 0) {
+                            await bot.sendMessage(chatId, buffer);
+                        }
+                    } catch (inner) {
+                        log.error("Failed to fetch wallet positions", inner);
+                        await bot.sendMessage(chatId, `Failed to fetch positions for one wallet: ${inner}`);
+                    }
+                }
+            } catch (e) {
+                log.error("Help flow error", e);
+                await bot.sendMessage(chatId, `Failed to fetch wallet positions: ${e}`);
+            }
         }
     });
 
@@ -121,13 +185,14 @@ const startRouter = (bot: TelegramBot) => {
         if (session.waitingForTokenAddress) {
             const tokenAddress = msg.text.trim();
             if (tokenAddress) {
-                console.log("Token address:", tokenAddress);
+                log.info("Manual token address entered", { chatId, tokenAddress });
                 session.tokenAddress = tokenAddress;
                 session.waitingForTokenAddress = false;      
                 await bot.sendMessage(chatId, `👌 Success! Ready for swap ...                                                 \n\n💰 Amount: ${session.amount.toFixed(6)} SOL           \n🤝 Token Address: ${tokenAddress}`);
                 // console.log("----***--SwapConfig---***---", swapConfig(tokenAddress, session.amount));
                 await bot.sendMessage(chatId, `Token: ${tokenAddress}, Amount: ${session.amount} SOL`);
                 if (createSignal(tokenAddress, session.amount)){
+                    tlog.info("Manual buy signal created", { tokenAddress, amount: session.amount });
                     await tokenBuy();
                 }
                 await bot.sendMessage(chatId, "🏆 Choose your buy method:                  ", selectedBuyOptions);
@@ -140,6 +205,7 @@ const startRouter = (bot: TelegramBot) => {
                 session.amount = amount;
                 session.waitingForAmount = false;
                 session.waitingForTokenAddress = true;
+                log.info("Manual amount entered", { chatId, amount });
                 bot.sendMessage(chatId, "🧧 Input the token address you want to buy ...  (sol)     \n\n⚱️  For example: CXeaSFtgwDJ6HKrGNNxtDEwydUcbZySx8rhJmoJBkEy3      ");
             } else {
                 bot.sendMessage(chatId, "Invalid amount. Please enter a valid number.");
@@ -166,12 +232,14 @@ const startRouter = (bot: TelegramBot) => {
                             chain: "solana" as const,
                             timestamp: new Date().toISOString()
                         };
+                        tlog.info("Auto Sell triggered", { token: candidate, percent: 100 });
                         await runTrade(signal, 0);
                         await bot.sendMessage(chatId, `Auto Sell triggered for ${candidate} (100%)`);
                         break;
                     } else {
                         const amount = getRandomArbitrary(solBuyAmountRange[0], solBuyAmountRange[1]);
                         if (createSignal(candidate, amount, 'buy')) {
+                            tlog.info("Auto Buy triggered", { token: candidate, amount });
                             await tokenBuy();
                             await bot.sendMessage(chatId, `Auto Buy triggered for ${candidate}\nAmount: ${amount.toFixed(6)} SOL`);
                             break; // one token per message
@@ -184,6 +252,7 @@ const startRouter = (bot: TelegramBot) => {
 
     return {
         sellEnd: () => {
+            log.info("Sell cycle finished");
             bot.sendMessage(globalChatId, "Buy Success!      \nIf you want to stop token auto sell, please click Stop button...", stopOptions);
         }
     }    

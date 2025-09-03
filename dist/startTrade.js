@@ -18,10 +18,12 @@ const router_start_1 = __importDefault(require("./router/router.start"));
 // needed types
 const types_1 = require("./util/types");
 const bot_1 = __importDefault(require("./bot"));
+const logger_1 = require("./util/logger");
 let telegram_signals = {};
 let telegram_signals_list = [];
 let totalCnt = 0;
 const scrapeMessages = async () => {
+    const log = (0, logger_1.childLogger)(logger_1.appLogger, 'Scraper');
     // Determine channel to scrape from env or fallback
     const envChannel = process.env.TELEGRAM_CHANNEL;
     let telegram_channel_username = 'Maestrosdegen';
@@ -43,7 +45,7 @@ const scrapeMessages = async () => {
             telegram_channel_username = candidate;
         }
         else {
-            console.warn('TELEGRAM_CHANNEL appears to be a numeric chat ID. telegram-scraper expects a public channel username. Falling back to default.');
+            log.warn('TELEGRAM_CHANNEL appears to be a numeric chat ID. telegram-scraper expects a public channel username. Falling back to default.');
         }
     }
     let result = JSON.parse(await (0, telegram_scraper_1.telegram_scraper)(telegram_channel_username));
@@ -74,7 +76,7 @@ const scrapeMessages = async () => {
             while (questionNumber > 0) {
                 let questionPosition = recentMessage.indexOf("?");
                 recentMessage = recentMessage.slice(0, questionPosition);
-                console.log("$$$$$$$$$", recentMessage);
+                log.debug("Trimmed message", { recentMessage });
                 questionNumber--;
             }
         }
@@ -87,10 +89,11 @@ const scrapeMessages = async () => {
 };
 exports.scrapeMessages = scrapeMessages;
 const createSignal = (tokenAddress, amount, action = 'buy') => {
+    const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'Signals');
     const isAddress = (0, helper_1.verifyAddress)(tokenAddress);
-    console.log("isAddress", isAddress);
+    tlog.debug("verifyAddress", { tokenAddress, isAddress });
     if (isAddress === types_1.addressType.SOLANA) {
-        console.log("insert solana signal", tokenAddress);
+        tlog.info("Insert solana signal", { tokenAddress, amount, action });
         telegram_signals[totalCnt] = {
             id: totalCnt,
             contractAddress: tokenAddress,
@@ -108,24 +111,24 @@ const createSignal = (tokenAddress, amount, action = 'buy') => {
 };
 exports.createSignal = createSignal;
 const tokenBuy = async () => {
-    console.log("staring token buy");
+    const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'Buy');
+    tlog.info("Starting token buy cycle");
     // while (telegram_signals_list && telegram_signals.length) {
     try {
         /**
          * Check if valid buy signals exist.
          */
         let telegram_signals_length = telegram_signals_list.length;
-        console.log("telegram_signals_list", telegram_signals_list);
-        console.log("current telegram signal length", telegram_signals_length);
+        tlog.debug("Current signal state", { list: telegram_signals_list, length: telegram_signals_length });
         for (let i = 0; i < telegram_signals_length; i++) {
             await (0, exports.runTrade)(telegram_signals[telegram_signals_list[i]], i);
         }
-        console.log("current signal finished!");
+        tlog.info("Signal batch finished");
         if (db_1.buyActions.length > 0) {
             /**
              * Save successful buying signals to database.
              */
-            console.log("buyActions", db_1.buyActions);
+            tlog.info("Persisting buy actions", { count: db_1.buyActions.length });
             const res = await (0, db_1.addBuy)();
             // Remove the signals bought in valid signal group;
             const elementToRemove = [];
@@ -133,27 +136,27 @@ const tokenBuy = async () => {
                 elementToRemove.push(buyAction.signalNumber);
                 telegram_signals[telegram_signals_list[buyAction.signalNumber]] = null;
             }
-            console.log("elementToKeep => ", elementToRemove);
-            console.log("before buy telegram_signals_list => ", telegram_signals_list);
+            tlog.debug("Elements removed", { elementToRemove, before: telegram_signals_list });
             telegram_signals_list = telegram_signals_list.filter((element, index) => !elementToRemove.includes(index));
-            console.log("current telegram signal length in db", telegram_signals_list.length);
-            console.log("after buy telegram_signals_list => ", telegram_signals_list);
-            console.log("successfully saved buy siganls!");
+            tlog.info("Signals updated after buy", { remaining: telegram_signals_list.length, after: telegram_signals_list });
+            tlog.info("Successfully saved buy signals");
             db_1.buyActions.length = 0;
         }
     }
     catch (err) {
-        console.log("error", err);
+        const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'Buy');
+        tlog.error("Buy cycle error", err);
     }
 };
 exports.tokenBuy = tokenBuy;
 const tokenSell = async () => {
-    console.log("starting token sell");
+    const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'Sell');
+    tlog.info("Starting token sell cycle");
     /**
      * fetch sell siganls from database.
      */
     const buySolanaHistoryData = await (0, db_1.getSolanaBuys)();
-    console.log("buySolanaHistoryData => ", buySolanaHistoryData);
+    tlog.debug("Fetched buy history", { count: buySolanaHistoryData === null || buySolanaHistoryData === void 0 ? void 0 : buySolanaHistoryData.length });
     if (buySolanaHistoryData.length > 0) {
         let sellSolanaSignals = [];
         /**
@@ -165,14 +168,14 @@ const tokenSell = async () => {
          * configure all valid sell signals.
          */
         const sellSignals = [...sellSolanaSignals];
-        console.log("sellSignals", sellSignals);
+        tlog.info("Prepared sell signals", { count: sellSignals.length });
         if (sellSignals.length > 0) {
             for (let i = 0; i < sellSignals.length; i++) {
                 try {
                     await (0, exports.runTrade)(sellSignals[i], i);
                 }
                 catch (e) {
-                    console.error("sell error", e);
+                    tlog.error("Sell execution error", e);
                 }
             }
             /**
@@ -180,7 +183,7 @@ const tokenSell = async () => {
              */
             if (db_1.sellActions.length > 0) {
                 const res = await (0, db_1.updateSells)();
-                console.log(res);
+                tlog.info("Updated sell records", { result: res });
                 db_1.sellActions.length = 0;
                 (0, router_start_1.default)(bot_1.default).sellEnd();
             }
@@ -190,11 +193,13 @@ const tokenSell = async () => {
 exports.tokenSell = tokenSell;
 const runTrade = async (signal, signalNumber) => {
     try {
-        console.log("raydium swap start!");
+        const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'RunTrade');
+        tlog.info("Raydium swap start", { signal, signalNumber });
         await (0, raydium_1.default)(signal, signalNumber);
     }
     catch (e) {
-        console.log("trading failed", e);
+        const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'RunTrade');
+        tlog.error("Trading failed", e);
     }
 };
 exports.runTrade = runTrade;

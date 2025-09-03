@@ -19,6 +19,7 @@ import { Wallet } from '@coral-xyz/anchor';
 import bs58 from 'bs58'
 import dotenv from "dotenv";
 dotenv.config();
+import { tradeLogger, childLogger } from "../util/logger";
 
 const FALCONHIT_API_KEY = process.env.FALCONHIT_API_KEY
 
@@ -36,7 +37,7 @@ class RaydiumSwap {
    */
   constructor(WALLET_PRIVATE_KEY: string) {
     this.wallet = new Wallet(Keypair.fromSecretKey(Uint8Array.from(bs58.decode(WALLET_PRIVATE_KEY))))
-    console.log("wallet", this.wallet.publicKey);
+    childLogger(tradeLogger, 'RaydiumSwap').info("Wallet initialized", { publicKey: this.wallet.publicKey.toBase58() });
     this.wallet.payer
   }
   
@@ -48,7 +49,7 @@ class RaydiumSwap {
    * @returns {LiquidityPoolKeys | null} 
    */
   async getPoolInfoByTokenPair(mintA: string, mintB: string) {
-    console.log("Falconhit api key", FALCONHIT_API_KEY)
+    childLogger(tradeLogger, 'RaydiumSwap').debug("Falconhit api key present", { present: Boolean(FALCONHIT_API_KEY) })
     for (let i = 0; i < 3; i++) {
       try {
         const response = await axios.get(`https://valguibs.com/api/pool/pair/${mintA}/${mintB}`, {
@@ -56,7 +57,7 @@ class RaydiumSwap {
             Authorization: FALCONHIT_API_KEY
           }
         });
-        console.log(response.data);
+        childLogger(tradeLogger, 'RaydiumSwap').debug("pool pair response", response.data);
         const poolInfoData: LiquidityPoolKeys = {
           id: new PublicKey(response.data[0].id),
           baseMint: new PublicKey(response.data[0].baseMint),
@@ -88,7 +89,7 @@ class RaydiumSwap {
         return poolInfoData as LiquidityPoolKeys;
       } catch (err) {
         await Delay(1000);
-        console.error("get Pool info", err);
+        childLogger(tradeLogger, 'RaydiumSwap').error("get Pool info", err);
       }
     }
   }
@@ -202,7 +203,7 @@ class RaydiumSwap {
       signature: txid,
     }, 'finalized');
     if (confirmation.value.err) { throw new Error("   ❌ - Transaction not confirmed.") }
-    console.log('🎉 Transaction Succesfully Confirmed!', '\n', `https://solscan.io/tx/${txid}`);
+    childLogger(tradeLogger, 'RaydiumSwap').info('Transaction confirmed', { url: `https://solscan.io/tx/${txid}` });
     return true;
   }
 

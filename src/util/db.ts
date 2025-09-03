@@ -1,5 +1,6 @@
 // public modules
 import sqlite3 from "sqlite3";
+import { appLogger, childLogger } from "./logger";
 
 // needed types
 import { 
@@ -14,10 +15,11 @@ const sqlite3Verbose = sqlite3.verbose();
 
 // Open a database connection
 const db = new sqlite3Verbose.Database("./trading.db", (err) => {
+    const log = childLogger(appLogger, 'DB');
     if (err) {
-      return console.error(err);
+      return log.error('Connection error', err);
     }
-    console.log("--------------- Connected to the SQlite database --------------");
+    log.info("Connected to SQLite database");
 }); // In-memory database for demonstration, you can specify a file path for persistent storage
 
 // Create a table
@@ -26,7 +28,7 @@ db.serialize(() => {
       `CREATE TABLE IF NOT EXISTS buys (id INTEGER PRIMARY KEY, contractAddress TEXT, purchasedPrice FLOAT, priceFactor INTEGER, platform TEXT, chain TEXT, date TEXT);`,
       (err: any, row: any) => {
         if (err) {
-          console.error(err.message);
+          childLogger(appLogger, 'DB').error('Create table buys error', err.message);
         }
         //   console.log(row.id + "\t" + row.contractAddress);
       }
@@ -35,7 +37,7 @@ db.serialize(() => {
       `CREATE TABLE IF NOT EXISTS lastsignal (id INTEGER PRIMARY KEY, signalId INTEGER, date TEXT);`,
       (err: any, row: any) => {
         if (err) {
-          console.error(err.message);
+          childLogger(appLogger, 'DB').error('Create table lastsignal error', err.message);
         }
         //   console.log(row.id + "\t" + row.contractAddress);
       }
@@ -44,7 +46,7 @@ db.serialize(() => {
       `CREATE TABLE IF NOT EXISTS lookuptables (id INTEGER PRIMARY KEY, lutAddress TEXT);`,
       (err: any, row: any) => {
         if (err) {
-          console.error(err.message);
+          childLogger(appLogger, 'DB').error('Create table lookuptables error', err.message);
         }
       }
     )
@@ -77,11 +79,11 @@ export const addBuy = async () => {
         //Insert all recored to database at once
         db.run(sql, flatData, function(err) {
             if (err) {
-            console.error(err);
+            childLogger(appLogger, 'DB').error('Bulk insert error', err);
             reject(err);
             }
             else {
-            console.log("bulk insert successful!");
+            childLogger(appLogger, 'DB').info("Bulk insert successful");
             resolve(this.lastID);
             }
         });
@@ -163,14 +165,14 @@ export const updateSells = async () => {
         }
         const flatUpdateData = updateData.flat();
         const flatDeleteData = deleteData.flat();
-        console.log("flagUpdateData => ", flatUpdateData);
-        console.log("flatDeleteData => ", flatDeleteData);
+        childLogger(appLogger, 'DB').debug("update/delete batches", { flatUpdateData, flatDeleteData });
         try {
             if (flatUpdateData.length > 0) {
                 const updatePlaceholders = updateData.map(() => "(?)").join(', ');
                 const updateSql = `UPDATE buys SET priceFactor = ${updatePlaceholders} where id = ${updatePlaceholders}`;
                 db.run(updateSql, flatUpdateData, function(err) {
                     if (err) {
+                    childLogger(appLogger, 'DB').error('Update buys error', err);
                     reject(err);
                     }
                 });
@@ -180,12 +182,14 @@ export const updateSells = async () => {
                 const deleteSql = `DELETE FROM buys where id = ${deletePlaceholders}`;
                 db.run(deleteSql, flatDeleteData, function(err) {
                     if (err) {
+                    childLogger(appLogger, 'DB').error('Delete buys error', err);
                     reject(err);
                     }
                 });
             }
             resolve("success update sell!");
         } catch (err) {
+            childLogger(appLogger, 'DB').error('updateSells error', err);
             reject(err);
         }
     })

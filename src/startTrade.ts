@@ -37,6 +37,7 @@ import {
 } from "./util/types"
 
 import bot from './bot';
+import { appLogger, tradeLogger, childLogger } from './util/logger';
 
 
 let telegram_signals: signalMap = {};
@@ -45,6 +46,7 @@ let totalCnt: number = 0;
 
 
 export const scrapeMessages = async () => {
+  const log = childLogger(appLogger, 'Scraper');
   // Determine channel to scrape from env or fallback
   const envChannel = process.env.TELEGRAM_CHANNEL;
   let telegram_channel_username = 'Maestrosdegen';
@@ -64,7 +66,7 @@ export const scrapeMessages = async () => {
       if (candidate.startsWith('@')) candidate = candidate.slice(1);
       telegram_channel_username = candidate;
     } else {
-      console.warn('TELEGRAM_CHANNEL appears to be a numeric chat ID. telegram-scraper expects a public channel username. Falling back to default.');
+      log.warn('TELEGRAM_CHANNEL appears to be a numeric chat ID. telegram-scraper expects a public channel username. Falling back to default.');
     }
   }
 
@@ -97,7 +99,7 @@ export const scrapeMessages = async () => {
       while (questionNumber > 0) {
         let questionPosition = recentMessage.indexOf("?");
         recentMessage = recentMessage.slice(0, questionPosition );
-        console.log("$$$$$$$$$", recentMessage);
+        log.debug("Trimmed message", { recentMessage });
         questionNumber--;
       }
     }
@@ -112,10 +114,11 @@ export const scrapeMessages = async () => {
 }
 
 export const createSignal = (tokenAddress: string, amount: number, action: 'buy' | 'sell' = 'buy' ): boolean => {
+  const tlog = childLogger(tradeLogger, 'Signals');
   const isAddress = verifyAddress(tokenAddress);
-  console.log("isAddress", isAddress)
+  tlog.debug("verifyAddress", { tokenAddress, isAddress })
   if (isAddress === addressType.SOLANA) {
-    console.log("insert solana signal", tokenAddress);
+    tlog.info("Insert solana signal", { tokenAddress, amount, action });
     telegram_signals[totalCnt] = {
       id: totalCnt,
       contractAddress: tokenAddress,
@@ -132,24 +135,24 @@ export const createSignal = (tokenAddress: string, amount: number, action: 'buy'
   return false;
 }
 export const tokenBuy = async () => {
-  console.log("staring token buy");
+  const tlog = childLogger(tradeLogger, 'Buy');
+  tlog.info("Starting token buy cycle");
     // while (telegram_signals_list && telegram_signals.length) {
   try {
     /**
      * Check if valid buy signals exist. 
      */
     let telegram_signals_length = telegram_signals_list.length;
-    console.log("telegram_signals_list", telegram_signals_list);
-    console.log("current telegram signal length", telegram_signals_length);
+    tlog.debug("Current signal state", { list: telegram_signals_list, length: telegram_signals_length });
     for (let i = 0; i < telegram_signals_length; i++) {
       await runTrade(telegram_signals[telegram_signals_list[i]] as signal, i);
     }
-    console.log("current signal finished!");
+    tlog.info("Signal batch finished");
     if (buyActions.length > 0) {
       /**
        * Save successful buying signals to database.
        */
-      console.log("buyActions", buyActions);
+      tlog.info("Persisting buy actions", { count: buyActions.length });
       const res = await addBuy();
       
       // Remove the signals bought in valid signal group;
@@ -159,30 +162,29 @@ export const tokenBuy = async () => {
         telegram_signals[telegram_signals_list[buyAction.signalNumber]] = null;
       }
 
-      console.log("elementToKeep => ", elementToRemove);
-      console.log("before buy telegram_signals_list => ", telegram_signals_list);
+      tlog.debug("Elements removed", { elementToRemove, before: telegram_signals_list });
 
       telegram_signals_list = telegram_signals_list.filter((element, index) => !elementToRemove.includes(index));
       
-      console.log("current telegram signal length in db", telegram_signals_list.length);
-
-      console.log("after buy telegram_signals_list => ", telegram_signals_list);
-      console.log("successfully saved buy siganls!");
+      tlog.info("Signals updated after buy", { remaining: telegram_signals_list.length, after: telegram_signals_list });
+      tlog.info("Successfully saved buy signals");
 
       buyActions.length = 0;
     }
   } catch (err) {
-    console.log("error", err);
+    const tlog = childLogger(tradeLogger, 'Buy');
+    tlog.error("Buy cycle error", err);
   }
 }
 
 export const tokenSell = async () => {
-  console.log("starting token sell");
+  const tlog = childLogger(tradeLogger, 'Sell');
+  tlog.info("Starting token sell cycle");
   /**
    * fetch sell siganls from database.
    */
   const buySolanaHistoryData: any = await getSolanaBuys();
-  console.log("buySolanaHistoryData => ", buySolanaHistoryData);
+  tlog.debug("Fetched buy history", { count: buySolanaHistoryData?.length });
 
   if (buySolanaHistoryData.length > 0) {
     let sellSolanaSignals: signal[] = [];
@@ -195,14 +197,14 @@ export const tokenSell = async () => {
      * configure all valid sell signals.
      */
     const sellSignals = [ ...sellSolanaSignals];
-    console.log("sellSignals", sellSignals);
+    tlog.info("Prepared sell signals", { count: sellSignals.length });
     if (sellSignals.length > 0) {
       for (let i = 0; i < sellSignals.length; i++) {
         try {
           await runTrade(sellSignals[i], i);
         }
         catch (e) {
-          console.error("sell error", e);
+          tlog.error("Sell execution error", e);
         }
       }
       /**
@@ -210,7 +212,7 @@ export const tokenSell = async () => {
        */
       if (sellActions.length > 0) {
         const res = await updateSells();
-        console.log(res);
+        tlog.info("Updated sell records", { result: res });
         sellActions.length = 0;
         startRouter(bot).sellEnd();
 
@@ -222,9 +224,11 @@ export const tokenSell = async () => {
 
 export const runTrade = async (signal: signal, signalNumber: number) => {
   try {
-    console.log("raydium swap start!");
+    const tlog = childLogger(tradeLogger, 'RunTrade');
+    tlog.info("Raydium swap start", { signal, signalNumber });
     await raydiumToken(signal, signalNumber);
   } catch (e) {
-    console.log("trading failed", e);
+    const tlog = childLogger(tradeLogger, 'RunTrade');
+    tlog.error("Trading failed", e);
   }
 }
