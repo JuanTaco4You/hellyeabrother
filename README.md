@@ -6,7 +6,7 @@ Automated Solana token trader that listens to Telegram channels or group message
 
 ```bash
 # clone repository
-git clone <[repo-url](https://github.com/JuanTaco4You/hellyeabrother.git)>
+git clone https://github.com/JuanTaco4You/hellyeabrother.git
 cd hellyeabrother
 
 # install dependencies
