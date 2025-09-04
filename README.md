@@ -4,15 +4,11 @@
 
 ## Trading Stratergy
 
-![Stratergy](/assets/Stratergy.png)
-
 ## Realtime-Monitor Channel
 
 * **Channel Link** = https://t.me/Maestrosdegen
 
 * **Maestrosdegen Telegram Signal Channel for realtime monitoring**
-
-![Monitorchannel](/assets/Monitor.png)
 
 * we need to distinct solana token address and ethereum token address, etc.
 
@@ -58,4 +54,3 @@
 
 ## working process
 
-![working process](/assets/Trading_Process.png)
