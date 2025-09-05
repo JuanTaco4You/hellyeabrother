@@ -20,6 +20,7 @@ const startRouter = (bot) => {
     // Session state for each chat
     const sessions = {};
     // Dashboard state per chat
+    // Use NodeJS.Timeout (or ReturnType<typeof setInterval>) for Node compatibility
     const dashboards = {};
     let globalChatId;
     let autoBuyEnabled = false; // toggled by UI
@@ -49,6 +50,8 @@ const startRouter = (bot) => {
                 [{ text: "🛒 Buy", callback_data: "buy" }, { text: "📈 Sell", callback_data: "sell" }],
                 [{ text: "▶️ Execute Buy Cycle", callback_data: "exec_buy_cycle" }, { text: "⏩ Execute Sell Cycle", callback_data: "exec_sell_cycle" }],
                 [{ text: "📊 Live Dashboard", callback_data: "live_dashboard" }],
+                [{ text: "🧹 Clear DB Buys", callback_data: "clear_db_buys" }, { text: "🧹 Clear Non-held Buys", callback_data: "clear_nonheld_buys" }],
+                [{ text: "⚙️ Set Min Balance", callback_data: "set_min_balance" }],
                 channelUrl
                     ? [{ text: "💼 Help", callback_data: "help" }, { text: "📬 Channel", url: channelUrl }]
                     : [{ text: "💼 Help", callback_data: "help" }]
@@ -89,11 +92,22 @@ const startRouter = (bot) => {
         if (!isAuthorizedChat(chatId))
             return;
         log.info("/start received", { chatId });
-        const welcomeMessage = "🍄 Welcome to my soltank_bot!\n\n`AAEuA3DeoblV-LZQwoexDgWJoM2Tg0-E2Ns                                   `\n\n`https://t.me/mysol_tankbot`\n\n 🥞 Please choose a category below:";
+        let walletAddress = "No wallet configured";
+        try {
+            const wallets = Array.isArray(config_1.solanaWallets)
+                ? config_1.solanaWallets.filter(w => (w || '').trim().length > 0)
+                : [];
+            if (wallets.length > 0) {
+                const payer = web3_js_1.Keypair.fromSecretKey(Uint8Array.from(bs58_1.default.decode(wallets[0].trim())));
+                walletAddress = payer.publicKey.toBase58();
+            }
+        }
+        catch (_) { }
+        const welcomeMessage = `Welcome to the Savage Bot\n\n${walletAddress}\n\nPlease pick an option below`;
         bot.sendMessage(chatId, welcomeMessage, options);
     });
     bot.on("callback_query", async (callbackQuery) => {
-        var _a;
+        var _a, _b;
         const message = callbackQuery.message;
         const category = callbackQuery.data;
         const chatId = message.chat.id;
@@ -103,7 +117,7 @@ const startRouter = (bot) => {
         globalChatId = chatId;
         let tokenSellInterval;
         if (!sessions[chatId]) {
-            sessions[chatId] = { waitingForAmount: false, waitingForTokenAddress: false };
+            sessions[chatId] = { waitingForAmount: false, waitingForTokenAddress: false, minBalance: 0 };
         }
         if (category === "buy") {
             log.info("Buy menu opened", { chatId });
@@ -166,22 +180,62 @@ const startRouter = (bot) => {
                 const render = async () => {
                     var _a;
                     try {
-                        const buys = await (0, db_1.getSolanaBuys)();
-                        if (!buys || buys.length === 0) {
-                            await bot.editMessageText("📊 No open positions in DB.", { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
+                        // Load wallet SPL token balances and show only held positions.
+                        const wallets = Array.isArray(config_1.solanaWallets) ? config_1.solanaWallets.filter(w => (w || '').trim().length > 0) : [];
+                        const held = [];
+                        const solLines = [];
+                        const minBalance = Number(((_a = sessions[chatId]) === null || _a === void 0 ? void 0 : _a.minBalance) || 0);
+                        for (const pkBase58 of wallets) {
+                            try {
+                                const payer = web3_js_1.Keypair.fromSecretKey(Uint8Array.from(bs58_1.default.decode(pkBase58.trim())));
+                                // Wallet SOL balance
+                                const lamports = await config_1.connection.getBalance(payer.publicKey);
+                                const sol = lamports / 1e9;
+                                solLines.push(`◎ ${payer.publicKey.toBase58()}: ${sol.toFixed(6)} SOL`);
+                                const parsed = await config_1.connection.getParsedTokenAccountsByOwner(payer.publicKey, { programId: raydium_sdk_1.TOKEN_PROGRAM_ID });
+                                for (const acc of parsed.value) {
+                                    const info = acc.account.data.parsed.info;
+                                    const mint = info.mint;
+                                    const uiAmount = Number(info.tokenAmount.uiAmount || 0);
+                                    if (uiAmount > minBalance)
+                                        held.push({ mint, amount: uiAmount });
+                                }
+                            }
+                            catch (_) { }
+                        }
+                        if (held.length === 0) {
+                            const noPosText = [
+                                "📊 No SPL token balances found in configured wallets.",
+                                "",
+                                "◎ SOL Balances:",
+                                ...(solLines.length ? solLines : ["(no wallets configured)"])
+                            ].join("\n");
+                            await bot.editMessageText(noPosText, { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
                             return;
                         }
+                        // Build entry price map from DB buys (last entry per mint)
+                        const buys = await (0, db_1.getSolanaBuys)();
+                        const entryByMint = new Map();
+                        for (const row of buys || []) {
+                            entryByMint.set(String(row.contractAddress), Number(row.purchasedPrice));
+                        }
                         const lines = [];
-                        lines.push("📊 Live Positions (updates ~4s)\n");
-                        // Fetch prices sequentially to avoid rate-limit spikes
-                        for (const row of buys) {
-                            const token = row.contractAddress;
+                        lines.push("📊 Live Positions (updates ~4s)");
+                        lines.push("");
+                        lines.push(`◎ SOL Balances (min: ${minBalance}):`);
+                        if (solLines.length)
+                            lines.push(...solLines);
+                        else
+                            lines.push("(no wallets configured)");
+                        lines.push("");
+                        lines.push("SPL Token Positions:");
+                        for (const pos of held) {
+                            const token = pos.mint;
                             const p = await (0, helper_1.getSolanaTokenPriceBitquery)(token).catch(() => ({ usdPrice: undefined }));
                             const cur = p === null || p === void 0 ? void 0 : p.usdPrice;
-                            const entry = row.purchasedPrice;
-                            const pnl = cur && entry ? ((cur - entry) / entry) * 100 : undefined;
-                            const pf = row.priceFactor;
-                            lines.push(`• ${token}\n  entry: $${((_a = entry === null || entry === void 0 ? void 0 : entry.toFixed) === null || _a === void 0 ? void 0 : _a.call(entry, 6)) || entry} | cur: ${cur ? `$${cur.toFixed(6)}` : 'n/a'} | pnl: ${pnl != null ? pnl.toFixed(2) + '%' : 'n/a'} | pf: ${pf}`);
+                            const entry = entryByMint.get(token);
+                            const pnl = (cur != null && entry != null) ? ((cur - entry) / entry) * 100 : undefined;
+                            lines.push(`• ${token}\n  size: ${pos.amount} | entry: ${entry != null ? `$${entry.toFixed(6)}` : 'n/a'} | cur: ${cur != null ? `$${cur.toFixed(6)}` : 'n/a'} | pnl: ${pnl != null ? pnl.toFixed(2) + '%' : 'n/a'}`);
                         }
                         let text = lines.join("\n");
                         if (text.length > 3900)
@@ -207,6 +261,83 @@ const startRouter = (bot) => {
                 clearInterval(d.interval);
             dashboards[chatId] = undefined;
             await bot.sendMessage(chatId, "🛑 Dashboard stopped.");
+        }
+        else if (category === "clear_db_buys") {
+            await bot.sendMessage(chatId, "This will delete ALL rows from the buys table. Are you sure?", {
+                reply_markup: {
+                    inline_keyboard: [[
+                            { text: "✅ Confirm Clear", callback_data: "confirm_clear_db_buys" },
+                            { text: "❌ Cancel", callback_data: "cancel_clear_db_buys" }
+                        ]]
+                }
+            });
+        }
+        else if (category === "confirm_clear_db_buys") {
+            try {
+                await (0, db_1.clearAllBuys)();
+                await bot.sendMessage(chatId, "Buys table cleared.");
+            }
+            catch (e) {
+                log.error("Clear DB buys error", e);
+                await bot.sendMessage(chatId, `Failed to clear buys: ${e}`);
+            }
+        }
+        else if (category === "cancel_clear_db_buys") {
+            await bot.sendMessage(chatId, "Clear canceled.");
+        }
+        else if (category === "clear_nonheld_buys") {
+            try {
+                // Compute held mints
+                const wallets = Array.isArray(config_1.solanaWallets) ? config_1.solanaWallets.filter(w => (w || '').trim().length > 0) : [];
+                const heldSet = new Set();
+                for (const pkBase58 of wallets) {
+                    try {
+                        const payer = web3_js_1.Keypair.fromSecretKey(Uint8Array.from(bs58_1.default.decode(pkBase58.trim())));
+                        const parsed = await config_1.connection.getParsedTokenAccountsByOwner(payer.publicKey, { programId: raydium_sdk_1.TOKEN_PROGRAM_ID });
+                        for (const acc of parsed.value) {
+                            const info = acc.account.data.parsed.info;
+                            const mint = info.mint;
+                            const uiAmount = Number(info.tokenAmount.uiAmount || 0);
+                            if (uiAmount > 0)
+                                heldSet.add(mint);
+                        }
+                    }
+                    catch (_) { }
+                }
+                const held = Array.from(heldSet);
+                await bot.sendMessage(chatId, `About to clear non-held buys. Held count: ${held.length}. Proceed?`, {
+                    reply_markup: { inline_keyboard: [[
+                                { text: "✅ Confirm", callback_data: `confirm_clear_nonheld_buys` },
+                                { text: "❌ Cancel", callback_data: `cancel_clear_nonheld_buys` }
+                            ]] }
+                });
+                // Cache held in session for confirm step
+                sessions[chatId].pendingHeld = held;
+            }
+            catch (e) {
+                log.error("Prep clear non-held error", e);
+                await bot.sendMessage(chatId, `Failed to prepare clear: ${e}`);
+            }
+        }
+        else if (category === "confirm_clear_nonheld_buys") {
+            try {
+                const held = ((_b = sessions[chatId]) === null || _b === void 0 ? void 0 : _b.pendingHeld) || [];
+                await (0, db_1.clearBuysNotIn)(held);
+                sessions[chatId].pendingHeld = undefined;
+                await bot.sendMessage(chatId, "Cleared non-held buys.");
+            }
+            catch (e) {
+                log.error("Clear non-held buys error", e);
+                await bot.sendMessage(chatId, `Failed to clear non-held buys: ${e}`);
+            }
+        }
+        else if (category === "cancel_clear_nonheld_buys") {
+            sessions[chatId].pendingHeld = undefined;
+            await bot.sendMessage(chatId, "Clear non-held canceled.");
+        }
+        else if (category === "set_min_balance") {
+            sessions[chatId].waitingForMinBalance = true;
+            await bot.sendMessage(chatId, "Enter minimum SPL token balance to display (e.g., 0.001). Use 0 to show all.");
         }
         else if (category === "help") {
             try {
@@ -338,13 +469,31 @@ const startRouter = (bot) => {
                 bot.sendMessage(chatId, "Invalid percent. Enter a number between 1 and 100.");
             }
         }
+        else if (session.waitingForMinBalance) {
+            const min = parseFloat(msg.text);
+            if (!isNaN(min) && min >= 0) {
+                sessions[chatId].minBalance = min;
+                sessions[chatId].waitingForMinBalance = false;
+                log.info("Min balance updated", { chatId, min });
+                await bot.sendMessage(chatId, `Minimum balance set to ${min}. This filters dashboard SPL positions.`);
+            }
+            else {
+                await bot.sendMessage(chatId, "Invalid number. Please enter a non-negative number, e.g., 0.001");
+            }
+        }
         else if (autoBuyEnabled && typeof msg.text === 'string' && msg.text.trim().length > 0) {
-            // Auto Buy mode: parse incoming message for Solana token addresses and buy
+            // Auto Buy mode: robustly parse message for possible Solana mint addresses
             const text = msg.text;
-            const parts = text.split(/[\s\n,;:()<>#'"`]+/).filter(Boolean);
-            const base58Regex = /^[1-9A-HJ-NP-Za-km-z]+$/;
-            const candidates = parts.filter(p => p.length >= 32 && p.length <= 44 && base58Regex.test(p));
-            for (const candidate of candidates) {
+            // Extract all base58 substrings of plausible mint length wherever they appear
+            const candidates = Array.from(new Set((text.match(/[1-9A-HJ-NP-Za-km-z]{32,44}/g) || [])));
+            for (let raw of candidates) {
+                // Handle GMGN-style suffixes like '<mint>pump'
+                let candidate = raw;
+                if (candidate.toLowerCase().endsWith('pump')) {
+                    const trimmed = candidate.slice(0, -4);
+                    if ((0, helper_2.verifyAddress)(trimmed) === types_1.addressType.SOLANA)
+                        candidate = trimmed;
+                }
                 const kind = (0, helper_2.verifyAddress)(candidate);
                 if (kind === types_1.addressType.SOLANA) {
                     // Detect SELL intent
