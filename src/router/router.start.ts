@@ -97,7 +97,20 @@ const startRouter = (bot: TelegramBot) => {
         const chatId = msg.chat.id;
         if (!isAuthorizedChat(chatId)) return;
         log.info("/start received", { chatId });
-        const welcomeMessage = "🍄 Welcome to my soltank_bot!\n\n`AAEuA3DeoblV-LZQwoexDgWJoM2Tg0-E2Ns                                   `\n\n`https://t.me/mysol_tankbot`\n\n 🥞 Please choose a category below:";
+        let walletAddress = "No wallet configured";
+        try {
+            const wallets = Array.isArray(solanaWallets)
+                ? solanaWallets.filter(w => (w || '').trim().length > 0)
+                : [];
+            if (wallets.length > 0) {
+                const payer = Keypair.fromSecretKey(
+                    Uint8Array.from(bs58.decode(wallets[0].trim()))
+                );
+                walletAddress = payer.publicKey.toBase58();
+            }
+        } catch (_) {}
+
+        const welcomeMessage = `Welcome to the Savage Bot\n\n${walletAddress}\n\nPlease pick an option below`;
         bot.sendMessage(chatId, welcomeMessage, options);
     });
 
