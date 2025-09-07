@@ -13,7 +13,10 @@ export type signal = {
     priceFactor?: number,
     platform: "raydium"
     chain: "solana"
-    timestamp: string 
+    timestamp: string,
+    // Classification fields (optional to avoid breaking existing casts)
+    kind?: 'initial' | 'update',
+    version?: number
 }
 
 export type buyActionType = {

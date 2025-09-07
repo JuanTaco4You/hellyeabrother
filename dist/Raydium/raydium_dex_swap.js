@@ -139,9 +139,8 @@ class BaseRay {
         return res;
     }
     async computeBuyAmount(input, etc) {
-        var _a, _b, _c, _d;
         const { amount, buyToken, inputAmountType, poolKeys, user } = input;
-        const slippage = (_a = input.slippage) !== null && _a !== void 0 ? _a : new raydium_sdk_1.Percent(1, 100);
+        const slippage = input.slippage ?? new raydium_sdk_1.Percent(1, 100);
         const base = poolKeys.baseMint;
         const baseMintDecimals = poolKeys.baseDecimals;
         const quote = poolKeys.quoteMint;
@@ -160,9 +159,9 @@ class BaseRay {
         // const lpSupply = new BN(Number(MintLayout.decode(lpAccountInfo.data).supply.toString()))
         // const baseReserve = new BN(Number(AccountLayout.decode(baseVAccountInfo.data).amount.toString()))
         // const quoteReserve = new BN(Number(AccountLayout.decode(quoteVAccountInfo.data).amount.toString()))
-        const lpSupply = new anchor_2.BN((0, bigint_buffer_1.toBufferBE)(spl_token_1.MintLayout.decode(lpAccountInfo.data).supply, 8)).addn((_b = etc === null || etc === void 0 ? void 0 : etc.extraLpSupply) !== null && _b !== void 0 ? _b : 0);
-        const baseReserve = new anchor_2.BN((0, bigint_buffer_1.toBufferBE)(spl_token_1.AccountLayout.decode(baseVAccountInfo.data).amount, 8)).addn((_c = etc === null || etc === void 0 ? void 0 : etc.extraBaseResever) !== null && _c !== void 0 ? _c : 0);
-        const quoteReserve = new anchor_2.BN((0, bigint_buffer_1.toBufferBE)(spl_token_1.AccountLayout.decode(quoteVAccountInfo.data).amount, 8)).addn((_d = etc === null || etc === void 0 ? void 0 : etc.extraQuoteReserve) !== null && _d !== void 0 ? _d : 0);
+        const lpSupply = new anchor_2.BN((0, bigint_buffer_1.toBufferBE)(spl_token_1.MintLayout.decode(lpAccountInfo.data).supply, 8)).addn(etc?.extraLpSupply ?? 0);
+        const baseReserve = new anchor_2.BN((0, bigint_buffer_1.toBufferBE)(spl_token_1.AccountLayout.decode(baseVAccountInfo.data).amount, 8)).addn(etc?.extraBaseResever ?? 0);
+        const quoteReserve = new anchor_2.BN((0, bigint_buffer_1.toBufferBE)(spl_token_1.AccountLayout.decode(quoteVAccountInfo.data).amount, 8)).addn(etc?.extraQuoteReserve ?? 0);
         let fixedSide;
         const poolInfo = {
             baseDecimals: poolKeys.baseDecimals,
@@ -217,11 +216,10 @@ class BaseRay {
         };
     }
     async buyFromPool(input) {
-        var _a, _b, _c, _d;
         this.reInit();
         const { amountIn, amountOut, poolKeys, user, fixedSide, tokenAccountIn, tokenAccountOut } = input;
         const inToken = amountIn.token.mint;
-        tlog.debug('token accounts', { inToken: inToken.toBase58(), tokenAccountIn: (_b = (_a = tokenAccountIn.toBase58) === null || _a === void 0 ? void 0 : _a.call(tokenAccountIn)) !== null && _b !== void 0 ? _b : String(tokenAccountIn), tokenAccountOut: (_d = (_c = tokenAccountOut.toBase58) === null || _c === void 0 ? void 0 : _c.call(tokenAccountOut)) !== null && _d !== void 0 ? _d : String(tokenAccountOut) });
+        tlog.debug('token accounts', { inToken: inToken.toBase58(), tokenAccountIn: tokenAccountIn.toBase58?.() ?? String(tokenAccountIn), tokenAccountOut: tokenAccountOut.toBase58?.() ?? String(tokenAccountOut) });
         if (inToken.toBase58() == spl_token_1.NATIVE_MINT.toBase58()) {
             let lamports = BigInt(amountIn.raw.toNumber());
             const sendSolIx = anchor_1.web3.SystemProgram.transfer({
@@ -271,7 +269,7 @@ function sleep(ms) {
 exports.sleep = sleep;
 function getPubkeyFromStr(str) {
     try {
-        return new anchor_1.web3.PublicKey((str !== null && str !== void 0 ? str : "").trim());
+        return new anchor_1.web3.PublicKey((str ?? "").trim());
     }
     catch (error) {
         return null;

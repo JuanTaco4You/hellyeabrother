@@ -6,9 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TelegramBot = require("node-telegram-bot-api");
 const bot_1 = __importDefault(require("./bot"));
 const router_1 = __importDefault(require("./router"));
+const signalState_1 = require("./util/signalState");
 const logger_1 = require("./util/logger");
-(() => {
+(async () => {
     const log = (0, logger_1.childLogger)(logger_1.appLogger, 'Bootstrap');
+    try {
+        await (0, signalState_1.initSignalState)();
+        log.info('Signal state ready');
+    }
+    catch (e) {
+        log.error('Signal state init failed', e);
+    }
     log.info('Starting Telegram bot router');
     (0, router_1.default)(bot_1.default);
 })();

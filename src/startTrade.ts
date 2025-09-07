@@ -5,6 +5,7 @@ dotenv.config();
 
 // private module
 import raydiumToken from "./Raydium/raydium"
+import jupiterToken from "./Jupiter/jupiter"
 
 import {
   verifyAddress,
@@ -30,7 +31,7 @@ import {
 import startRouter from './router/router.start';
 
 // needed types
-import {
+import { 
   signal,
   addressType,
   signalMap
@@ -38,6 +39,8 @@ import {
 
 import bot from './bot';
 import { appLogger, tradeLogger, childLogger } from './util/logger';
+import { SWAP_ENGINE } from './config';
+import { classifySignal } from './util/signalState';
 
 
 let telegram_signals: signalMap = {};
@@ -118,7 +121,12 @@ export const createSignal = (tokenAddress: string, amount: number, action: 'buy'
   const isAddress = verifyAddress(tokenAddress);
   tlog.debug("verifyAddress", { tokenAddress, isAddress })
   if (isAddress === addressType.SOLANA) {
-    tlog.info("Insert solana signal", { tokenAddress, amount, action });
+    const { kind, version } = classifySignal(tokenAddress, action);
+    if (action === 'buy' && kind === 'update') {
+      tlog.info("Skipping re-buy on update", { tokenAddress, version });
+      return false;
+    }
+    tlog.info("Insert solana signal", { tokenAddress, amount, action, kind, version });
     telegram_signals[totalCnt] = {
       id: totalCnt,
       contractAddress: tokenAddress,
@@ -127,6 +135,8 @@ export const createSignal = (tokenAddress: string, amount: number, action: 'buy'
       platform: "raydium",
       chain: "solana",
       timestamp: new Date().toISOString(),
+      kind,
+      version,
     } as signal;
     telegram_signals_list.push(totalCnt);
     totalCnt = totalCnt + 1;
@@ -225,8 +235,23 @@ export const tokenSell = async () => {
 export const runTrade = async (signal: signal, signalNumber: number) => {
   try {
     const tlog = childLogger(tradeLogger, 'RunTrade');
-    tlog.info("Raydium swap start", { signal, signalNumber });
-    await raydiumToken(signal, signalNumber);
+    tlog.info("Swap start", { signal, signalNumber });
+    if (SWAP_ENGINE === 'jupiter') {
+      tlog.info("Using Jupiter swap engine");
+      await jupiterToken(signal, signalNumber);
+    } else if (SWAP_ENGINE === 'raydium') {
+      tlog.info("Using Raydium swap engine");
+      await raydiumToken(signal, signalNumber);
+    } else {
+      // Auto: try Jupiter then fall back to Raydium
+      tlog.info("Using auto swap engine: Jupiter -> Raydium fallback");
+      try {
+        await jupiterToken(signal, signalNumber);
+      } catch (err) {
+        tlog.warn("Jupiter failed, falling back to Raydium", err);
+        await raydiumToken(signal, signalNumber);
+      }
+    }
   } catch (e) {
     const tlog = childLogger(tradeLogger, 'RunTrade');
     tlog.error("Trading failed", e);

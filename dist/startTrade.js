@@ -10,6 +10,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 // private module
 const raydium_1 = __importDefault(require("./Raydium/raydium"));
+const jupiter_1 = __importDefault(require("./Jupiter/jupiter"));
 const helper_1 = require("./util/helper");
 const config_1 = require("./config");
 const db_1 = require("./util/db");
@@ -19,6 +20,8 @@ const router_start_1 = __importDefault(require("./router/router.start"));
 const types_1 = require("./util/types");
 const bot_1 = __importDefault(require("./bot"));
 const logger_1 = require("./util/logger");
+const config_2 = require("./config");
+const signalState_1 = require("./util/signalState");
 let telegram_signals = {};
 let telegram_signals_list = [];
 let totalCnt = 0;
@@ -93,7 +96,12 @@ const createSignal = (tokenAddress, amount, action = 'buy') => {
     const isAddress = (0, helper_1.verifyAddress)(tokenAddress);
     tlog.debug("verifyAddress", { tokenAddress, isAddress });
     if (isAddress === types_1.addressType.SOLANA) {
-        tlog.info("Insert solana signal", { tokenAddress, amount, action });
+        const { kind, version } = (0, signalState_1.classifySignal)(tokenAddress, action);
+        if (action === 'buy' && kind === 'update') {
+            tlog.info("Skipping re-buy on update", { tokenAddress, version });
+            return false;
+        }
+        tlog.info("Insert solana signal", { tokenAddress, amount, action, kind, version });
         telegram_signals[totalCnt] = {
             id: totalCnt,
             contractAddress: tokenAddress,
@@ -102,6 +110,8 @@ const createSignal = (tokenAddress, amount, action = 'buy') => {
             platform: "raydium",
             chain: "solana",
             timestamp: new Date().toISOString(),
+            kind,
+            version,
         };
         telegram_signals_list.push(totalCnt);
         totalCnt = totalCnt + 1;
@@ -156,7 +166,7 @@ const tokenSell = async () => {
      * fetch sell siganls from database.
      */
     const buySolanaHistoryData = await (0, db_1.getSolanaBuys)();
-    tlog.debug("Fetched buy history", { count: buySolanaHistoryData === null || buySolanaHistoryData === void 0 ? void 0 : buySolanaHistoryData.length });
+    tlog.debug("Fetched buy history", { count: buySolanaHistoryData?.length });
     if (buySolanaHistoryData.length > 0) {
         let sellSolanaSignals = [];
         /**
@@ -194,8 +204,26 @@ exports.tokenSell = tokenSell;
 const runTrade = async (signal, signalNumber) => {
     try {
         const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'RunTrade');
-        tlog.info("Raydium swap start", { signal, signalNumber });
-        await (0, raydium_1.default)(signal, signalNumber);
+        tlog.info("Swap start", { signal, signalNumber });
+        if (config_2.SWAP_ENGINE === 'jupiter') {
+            tlog.info("Using Jupiter swap engine");
+            await (0, jupiter_1.default)(signal, signalNumber);
+        }
+        else if (config_2.SWAP_ENGINE === 'raydium') {
+            tlog.info("Using Raydium swap engine");
+            await (0, raydium_1.default)(signal, signalNumber);
+        }
+        else {
+            // Auto: try Jupiter then fall back to Raydium
+            tlog.info("Using auto swap engine: Jupiter -> Raydium fallback");
+            try {
+                await (0, jupiter_1.default)(signal, signalNumber);
+            }
+            catch (err) {
+                tlog.warn("Jupiter failed, falling back to Raydium", err);
+                await (0, raydium_1.default)(signal, signalNumber);
+            }
+        }
     }
     catch (e) {
         const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'RunTrade');

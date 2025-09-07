@@ -34,12 +34,12 @@ function stringifyMeta(meta) {
         };
         return JSON.stringify(meta, replacer);
     }
-    catch (_a) {
+    catch {
         try {
             // Last resort best‑effort fallback
             return String(meta);
         }
-        catch (_b) {
+        catch {
             return '[Unserializable meta]';
         }
     }

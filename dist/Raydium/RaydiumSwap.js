@@ -14,6 +14,7 @@ const logger_1 = require("../util/logger");
 const FALCONHIT_API_KEY = process.env.FALCONHIT_API_KEY;
 const config_1 = require("../config");
 const helper_1 = require("../util/helper");
+const swapConfig_1 = __importDefault(require("./swapConfig"));
 /**
  * Class representing a Raydium Swap operation.
  */
@@ -28,56 +29,161 @@ class RaydiumSwap {
         this.wallet.payer;
     }
     /**
-     * Gets pool information for the given token pair using FalconHit api
+     * Gets pool information for the given token pair using Raydium's official liquidity list.
      * @async
      * @param {string} mintA - The mint address of the first token.
-     * @param {string} mintB - The mint address of the second token
+     * @param {string} mintB - The mint address of the second token.
      * @returns {LiquidityPoolKeys | null}
      */
     async getPoolInfoByTokenPair(mintA, mintB) {
-        (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').debug("Falconhit api key present", { present: Boolean(FALCONHIT_API_KEY) });
+        const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap');
+        tlog.debug("Using Raydium liquidity list", { url: swapConfig_1.default.liquidityFile });
+        const normalize = (s) => s.trim();
+        const a = normalize(mintA);
+        const b = normalize(mintB);
         for (let i = 0; i < 3; i++) {
             try {
-                const response = await axios_1.default.get(`https://valguibs.com/api/pool/pair/${mintA}/${mintB}`, {
-                    headers: {
-                        Authorization: FALCONHIT_API_KEY
-                    }
-                });
-                (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').debug("pool pair response", response.data);
+                const { data } = await axios_1.default.get(swapConfig_1.default.liquidityFile, { headers: { 'Cache-Control': 'no-cache' } });
+                if (!Array.isArray(data)) {
+                    tlog.warn('Unexpected Raydium liquidity response shape');
+                    break;
+                }
+                // Prefer exact base/quote match; fall back to reversed order
+                const match = data.find((p) => p.baseMint === a && p.quoteMint === b) ||
+                    data.find((p) => p.baseMint === b && p.quoteMint === a);
+                if (!match)
+                    break;
+                tlog.info('Found pool info');
                 const poolInfoData = {
-                    id: new web3_js_1.PublicKey(response.data[0].id),
-                    baseMint: new web3_js_1.PublicKey(response.data[0].baseMint),
-                    quoteMint: new web3_js_1.PublicKey(response.data[0].quoteMint),
-                    lpMint: new web3_js_1.PublicKey(response.data[0].lpMint),
-                    baseDecimals: response.data[0].baseDecimals,
-                    quoteDecimals: response.data[0].quoteDecimals,
-                    lpDecimals: response.data[0].lpDecimals,
-                    version: response.data[0].version,
-                    programId: new web3_js_1.PublicKey(response.data[0].programId),
-                    authority: new web3_js_1.PublicKey(response.data[0].authority),
-                    openOrders: new web3_js_1.PublicKey(response.data[0].openOrders),
-                    targetOrders: new web3_js_1.PublicKey(response.data[0].targetOrders),
-                    baseVault: new web3_js_1.PublicKey(response.data[0].baseVault),
-                    quoteVault: new web3_js_1.PublicKey(response.data[0].quoteVault),
-                    withdrawQueue: new web3_js_1.PublicKey(response.data[0].withdrawQueue),
-                    lpVault: new web3_js_1.PublicKey(response.data[0].lpVault),
-                    marketVersion: response.data[0].marketVersion,
-                    marketProgramId: new web3_js_1.PublicKey(response.data[0].marketProgramId),
-                    marketId: new web3_js_1.PublicKey(response.data[0].marketId),
-                    marketAuthority: new web3_js_1.PublicKey(response.data[0].marketAuthority),
-                    marketBaseVault: new web3_js_1.PublicKey(response.data[0].marketBaseVault),
-                    marketQuoteVault: new web3_js_1.PublicKey(response.data[0].marketQuoteVault),
-                    marketBids: new web3_js_1.PublicKey(response.data[0].marketBids),
-                    marketAsks: new web3_js_1.PublicKey(response.data[0].marketAsks),
-                    marketEventQueue: new web3_js_1.PublicKey(response.data[0].marketEventQueue),
-                    lookupTableAccount: response.data[0].lookupTableAccount,
+                    id: new web3_js_1.PublicKey(match.id),
+                    baseMint: new web3_js_1.PublicKey(match.baseMint),
+                    quoteMint: new web3_js_1.PublicKey(match.quoteMint),
+                    lpMint: new web3_js_1.PublicKey(match.lpMint),
+                    baseDecimals: match.baseDecimals,
+                    quoteDecimals: match.quoteDecimals,
+                    lpDecimals: match.lpDecimals,
+                    version: match.version,
+                    programId: new web3_js_1.PublicKey(match.programId),
+                    authority: new web3_js_1.PublicKey(match.authority),
+                    openOrders: new web3_js_1.PublicKey(match.openOrders),
+                    targetOrders: new web3_js_1.PublicKey(match.targetOrders),
+                    baseVault: new web3_js_1.PublicKey(match.baseVault),
+                    quoteVault: new web3_js_1.PublicKey(match.quoteVault),
+                    withdrawQueue: new web3_js_1.PublicKey(match.withdrawQueue),
+                    lpVault: new web3_js_1.PublicKey(match.lpVault),
+                    marketVersion: match.marketVersion,
+                    marketProgramId: new web3_js_1.PublicKey(match.marketProgramId),
+                    marketId: new web3_js_1.PublicKey(match.marketId),
+                    marketAuthority: new web3_js_1.PublicKey(match.marketAuthority),
+                    marketBaseVault: new web3_js_1.PublicKey(match.marketBaseVault),
+                    marketQuoteVault: new web3_js_1.PublicKey(match.marketQuoteVault),
+                    marketBids: new web3_js_1.PublicKey(match.marketBids),
+                    marketAsks: new web3_js_1.PublicKey(match.marketAsks),
+                    marketEventQueue: new web3_js_1.PublicKey(match.marketEventQueue),
+                    lookupTableAccount: match.lookupTableAccount,
                 };
                 return poolInfoData;
             }
             catch (err) {
                 await (0, helper_1.Delay)(1000);
-                (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').error("get Pool info", err);
+                tlog.error("get Pool info", err);
             }
+        }
+        // Fallback: on-chain discovery via program accounts (new/unsynced pools)
+        return await this.getPoolInfoOnChain(a, b);
+    }
+    /**
+     * On-chain fallback: search Raydium AMM program accounts for a pool matching the mint pair.
+     */
+    async getPoolInfoOnChain(mintA, mintB) {
+        const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap');
+        try {
+            const PROGRAMS = [
+                new web3_js_1.PublicKey('675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8'), // mainnet
+                new web3_js_1.PublicKey('HWy1jotHpo6UqeQxx49dpYYdQB8wj9Qk9MdxwjLvDHB8'), // devnet
+            ];
+            const V4 = { base: 400, quote: 432, span: raydium_sdk_1.LIQUIDITY_STATE_LAYOUT_V4.span };
+            const V5 = { base: 432, quote: 464, span: raydium_sdk_1.LIQUIDITY_STATE_LAYOUT_V5.span };
+            const tryFind = async (programId, v, mA, mB) => {
+                const filters = [
+                    { dataSize: v.span },
+                    { memcmp: { offset: v.base, bytes: mA } },
+                    { memcmp: { offset: v.quote, bytes: mB } },
+                ];
+                const accs = await config_1.connection.getProgramAccounts(programId, { filters });
+                return accs?.[0];
+            };
+            for (const programId of PROGRAMS) {
+                // Try V5 exact order, then reversed
+                let found = await tryFind(programId, V5, mintA, mintB)
+                    || await tryFind(programId, V5, mintB, mintA)
+                    || await tryFind(programId, V4, mintA, mintB)
+                    || await tryFind(programId, V4, mintB, mintA);
+                if (!found)
+                    continue;
+                const isV4 = found.account.data.length === V4.span;
+                const state = isV4 ? raydium_sdk_1.LIQUIDITY_STATE_LAYOUT_V4.decode(found.account.data) : raydium_sdk_1.LIQUIDITY_STATE_LAYOUT_V5.decode(found.account.data);
+                const version = (isV4 ? 4 : 5);
+                const keys = raydium_sdk_1.Liquidity.getAssociatedPoolKeys({
+                    version,
+                    marketVersion: 3,
+                    marketId: state.marketId,
+                    marketProgramId: state.marketProgramId,
+                    baseMint: state.baseMint,
+                    baseDecimals: Number(state.baseDecimal.toNumber?.() ?? state.baseDecimal),
+                    quoteMint: state.quoteMint,
+                    quoteDecimals: Number(state.quoteDecimal.toNumber?.() ?? state.quoteDecimal),
+                    programId,
+                });
+                // Basic sanity: derived LP must match state
+                if (keys.lpMint.toBase58() !== state.lpMint.toBase58()) {
+                    tlog.warn('On-chain fallback: derived keys mismatch lpMint');
+                    continue;
+                }
+                // Derive market vaults and queues from market state
+                const marketAccountInfo = await config_1.connection.getAccountInfo(keys.marketId);
+                if (!marketAccountInfo) {
+                    tlog.warn('On-chain fallback: market account not found');
+                    continue;
+                }
+                const marketState = raydium_sdk_1.Market.getLayouts(keys.marketVersion).state.decode(marketAccountInfo.data);
+                const poolInfoData = {
+                    id: keys.id,
+                    baseMint: keys.baseMint,
+                    quoteMint: keys.quoteMint,
+                    lpMint: keys.lpMint,
+                    baseDecimals: keys.baseDecimals,
+                    quoteDecimals: keys.quoteDecimals,
+                    lpDecimals: keys.lpDecimals,
+                    version: keys.version,
+                    programId: keys.programId,
+                    authority: keys.authority,
+                    openOrders: keys.openOrders,
+                    targetOrders: keys.targetOrders,
+                    baseVault: keys.baseVault,
+                    quoteVault: keys.quoteVault,
+                    withdrawQueue: keys.withdrawQueue,
+                    lpVault: keys.lpVault,
+                    marketVersion: keys.marketVersion,
+                    marketProgramId: keys.marketProgramId,
+                    marketId: keys.marketId,
+                    marketAuthority: keys.marketAuthority,
+                    marketBaseVault: marketState.baseVault,
+                    marketQuoteVault: marketState.quoteVault,
+                    marketBids: marketState.bids,
+                    marketAsks: marketState.asks,
+                    marketEventQueue: marketState.eventQueue,
+                    lookupTableAccount: keys.lookupTableAccount,
+                };
+                tlog.info('On-chain fallback: Found pool info');
+                return poolInfoData;
+            }
+            tlog.warn('On-chain fallback: No pool found', { mintA, mintB });
+            return null;
+        }
+        catch (err) {
+            (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').error('On-chain pool discovery failed', err);
+            return null;
         }
     }
     /**
@@ -170,7 +276,7 @@ class RaydiumSwap {
             throw new Error("   ❌ - Transaction not confirmed.");
         }
         (0, logger_1.childLogger)(logger_1.tradeLogger, 'RaydiumSwap').info('Transaction confirmed', { url: `https://solscan.io/tx/${txid}` });
-        return true;
+        return txid;
     }
     /**
    * Simulates a versioned transaction.

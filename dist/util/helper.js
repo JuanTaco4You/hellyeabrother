@@ -67,11 +67,10 @@ const getSolanaTokenPrice = async (address) => {
 };
 exports.getSolanaTokenPrice = getSolanaTokenPrice;
 const getSolanaTokenPriceBitquery = async (address) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
     // Allow opting out of Bitquery entirely
     if (PRICE_PROVIDER === 'moralis') {
         const m = await (0, exports.getSolanaTokenPrice)(address);
-        return { usdPrice: m === null || m === void 0 ? void 0 : m.usdPrice };
+        return { usdPrice: m?.usdPrice };
     }
     await (0, exports.Delay)(200);
     (0, logger_1.childLogger)(logger_1.tradeLogger, 'Price').debug("token mint address", { address });
@@ -104,7 +103,7 @@ const getSolanaTokenPriceBitquery = async (address) => {
         try {
             const response = await axios_1.default.request(config);
             (0, logger_1.childLogger)(logger_1.tradeLogger, 'Price').debug("bitquery response", response.data);
-            const price = (_f = (_e = (_d = (_c = (_b = (_a = response === null || response === void 0 ? void 0 : response.data) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.Solana) === null || _c === void 0 ? void 0 : _c.DEXTradeByTokens) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e.Trade) === null || _f === void 0 ? void 0 : _f.PriceInUSD;
+            const price = response?.data?.data?.Solana?.DEXTradeByTokens?.[0]?.Trade?.PriceInUSD;
             if (price != null) {
                 return { usdPrice: price };
             }
@@ -113,8 +112,8 @@ const getSolanaTokenPriceBitquery = async (address) => {
             }
         }
         catch (err) {
-            const status = (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.status;
-            const msg = ((_h = err === null || err === void 0 ? void 0 : err.response) === null || _h === void 0 ? void 0 : _h.data) || (err === null || err === void 0 ? void 0 : err.message);
+            const status = err?.response?.status;
+            const msg = err?.response?.data || err?.message;
             (0, logger_1.childLogger)(logger_1.tradeLogger, 'Price').warn("Bitquery price fetch error", { address, status, msg });
         }
         await (0, exports.Delay)(1000);
@@ -122,7 +121,7 @@ const getSolanaTokenPriceBitquery = async (address) => {
     // Fallback to Moralis if Bitquery failed
     try {
         const m = await (0, exports.getSolanaTokenPrice)(address);
-        const usdPrice = m === null || m === void 0 ? void 0 : m.usdPrice;
+        const usdPrice = m?.usdPrice;
         if (usdPrice != null) {
             (0, logger_1.childLogger)(logger_1.tradeLogger, 'Price').info("Fallback: Moralis price used", { address, usdPrice });
             return { usdPrice };

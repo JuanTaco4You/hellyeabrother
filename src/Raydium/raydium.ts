@@ -19,6 +19,7 @@ import { solanaWallets } from '../config';
 import { signal } from '../util/types';
 import { buyActions, sellActions } from '../util/db';
 import { tradeLogger, childLogger } from '../util/logger';
+import { notify, notifySwapResult } from '../util/notifier';
 
 /**
  * Performs a token swap on the Raydium protocol.
@@ -62,6 +63,7 @@ const raydiumSwap = async (signal: signal, sell: boolean = false, signalNumber: 
     // console.log("poolInfo", poolInfo);
     if (!poolInfo) {
       tlog.warn("Pool info not found", { tokenAAddress, tokenBAddress });
+      await notify(`⚠️ No Raydium pool found for pair\nA: ${tokenAAddress}\nB: ${tokenBAddress}`);
       return;
     }
     tlog.info('Found pool info');
@@ -118,6 +120,7 @@ const raydiumSwap = async (signal: signal, sell: boolean = false, signalNumber: 
       const res = await raydiumSwap.sendVersionedTransaction(tx, swapConfig.maxRetries, recentBlockhash)
       if (res) { //&& await raydiumSwap.checkTranactionSuccess(txid)
         tlog.info('Swap success');
+        await notifySwapResult({ action: sell ? 'sell' : 'buy', token: sell ? tokenAAddress : tokenBAddress, amount: sell ? undefined : tokenAAmount, success: true, txid: String(res) });
         if (!sell) {
           
           /**
@@ -159,13 +162,18 @@ const raydiumSwap = async (signal: signal, sell: boolean = false, signalNumber: 
        * Simulate the transaction and log the result.
        */
       const simRes = await raydiumSwap.simulateVersionedTransaction(tx)
-      tlog.warn("Simulation result", { err: simRes.value?.err });
+      const err = simRes.value?.err;
+      tlog.warn("Simulation result", { err });
+      await notifySwapResult({ action: sell ? 'sell' : 'buy', token: sell ? tokenAAddress : tokenBAddress, amount: sell ? undefined : tokenAAmount, success: !Boolean(err), simulated: true, error: err });
       tlog.debug("Simulation detail", simRes);
     }
   } catch (err) {
     Delay(5000);
     const tlog = childLogger(tradeLogger, 'Raydium');
     tlog.error('Raydium swap error', err);
+    try {
+      await notifySwapResult({ action: (signal?.action as any) || 'buy', token: (signal?.contractAddress as any)?.toString?.() ?? 'unknown', amount: Number(String(signal?.amount || '').split(' ')[0] || '0'), success: false, error: err });
+    } catch {}
   }
 };
 

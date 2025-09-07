@@ -42,6 +42,22 @@ db.serialize(() => {
         //   console.log(row.id + "\t" + row.contractAddress);
       }
     );
+    // Track seen signals for persistence of initial vs update classification
+    db.run(
+      `CREATE TABLE IF NOT EXISTS signal_seen (
+        action TEXT NOT NULL,
+        contractAddress TEXT NOT NULL,
+        count INTEGER NOT NULL,
+        firstAt TEXT NOT NULL,
+        lastAt TEXT NOT NULL,
+        PRIMARY KEY (action, contractAddress)
+      );`,
+      (err: any) => {
+        if (err) {
+          childLogger(appLogger, 'DB').error('Create table signal_seen error', err.message);
+        }
+      }
+    );
     db.run(
       `CREATE TABLE IF NOT EXISTS lookuptables (id INTEGER PRIMARY KEY, lutAddress TEXT);`,
       (err: any, row: any) => {
@@ -148,46 +164,54 @@ const deleteBuy = async (id: number) => {
 
 export const updateSells = async () => {
     return new Promise((resolve, reject) => {
-        const updateData = [];
-        const deleteData = [];
-        for (const sellAction of sellActions) {
-            if (Number(sellAction.priceFactor) >= 2) {
-                deleteData.push(
-                    sellAction.id
-                );
-            }
-            else {
-                updateData.push([
-                    sellAction.priceFactor || 0 + 1,
-                    sellAction.id,
-                ]);
-            }
-        }
-        const flatUpdateData = updateData.flat();
-        const flatDeleteData = deleteData.flat();
-        childLogger(appLogger, 'DB').debug("update/delete batches", { flatUpdateData, flatDeleteData });
         try {
-            if (flatUpdateData.length > 0) {
-                const updatePlaceholders = updateData.map(() => "(?)").join(', ');
-                const updateSql = `UPDATE buys SET priceFactor = ${updatePlaceholders} where id = ${updatePlaceholders}`;
-                db.run(updateSql, flatUpdateData, function(err) {
+            const toDeleteIds: number[] = [];
+            const toUpdateIds: number[] = [];
+
+            for (const s of sellActions) {
+                const pf = Number(s.priceFactor ?? 0);
+                if (pf >= 2) toDeleteIds.push(s.id);
+                else toUpdateIds.push(s.id);
+            }
+
+            childLogger(appLogger, 'DB').debug("update/delete id sets", { toUpdateIds, toDeleteIds });
+
+            let pending = 0;
+            const done = () => { if (--pending === 0) resolve("success update sell!"); };
+
+            if (toUpdateIds.length > 0) {
+                pending++;
+                const placeholders = toUpdateIds.map(() => '?').join(',');
+                const sql = `UPDATE buys
+                    SET priceFactor = CASE
+                        WHEN priceFactor IS NULL THEN 1
+                        WHEN priceFactor < 2 THEN priceFactor + 1
+                        ELSE priceFactor
+                    END
+                    WHERE id IN (${placeholders})`;
+                db.run(sql, toUpdateIds, function (err) {
                     if (err) {
-                    childLogger(appLogger, 'DB').error('Update buys error', err);
-                    reject(err);
+                        childLogger(appLogger, 'DB').error('Update buys error', err);
+                        return reject(err);
                     }
+                    done();
                 });
             }
-            if (flatDeleteData.length > 0) {
-                const deletePlaceholders = deleteData.map(() => "(?)").join(', ');
-                const deleteSql = `DELETE FROM buys where id = ${deletePlaceholders}`;
-                db.run(deleteSql, flatDeleteData, function(err) {
+
+            if (toDeleteIds.length > 0) {
+                pending++;
+                const placeholders = toDeleteIds.map(() => '?').join(',');
+                const sql = `DELETE FROM buys WHERE id IN (${placeholders})`;
+                db.run(sql, toDeleteIds, function (err) {
                     if (err) {
-                    childLogger(appLogger, 'DB').error('Delete buys error', err);
-                    reject(err);
+                        childLogger(appLogger, 'DB').error('Delete buys error', err);
+                        return reject(err);
                     }
+                    done();
                 });
             }
-            resolve("success update sell!");
+
+            if (pending === 0) resolve("nothing to update");
         } catch (err) {
             childLogger(appLogger, 'DB').error('updateSells error', err);
             reject(err);
@@ -250,4 +274,35 @@ export const clearBuysNotIn = async (mints: string[]) => {
   
 
   
+// Persistent signal_seen helpers
+export type SignalSeenRow = { action: 'buy' | 'sell', contractAddress: string, count: number, firstAt: string, lastAt: string };
+
+export const loadAllSignalSeen = async (): Promise<SignalSeenRow[]> => {
+  return new Promise((resolve, reject) => {
+    db.all("SELECT action, contractAddress, count, firstAt, lastAt FROM signal_seen", (err, rows) => {
+      if (err) return reject(err);
+      resolve((rows || []).map((r: any) => ({
+        action: r.action,
+        contractAddress: r.contractAddress,
+        count: Number(r.count),
+        firstAt: String(r.firstAt),
+        lastAt: String(r.lastAt),
+      })));
+    });
+  });
+}
+
+export const upsertSignalSeen = async (action: 'buy' | 'sell', contractAddress: string, atISO: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const sql = `INSERT INTO signal_seen (action, contractAddress, count, firstAt, lastAt)
+                 VALUES (?, ?, 1, ?, ?)
+                 ON CONFLICT(action, contractAddress)
+                 DO UPDATE SET count = count + 1, lastAt = excluded.lastAt`;
+    db.run(sql, [action, contractAddress, atISO, atISO], function (err) {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+}
+
   

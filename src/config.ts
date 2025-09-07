@@ -25,3 +25,15 @@ const singleWallet = (process.env.SOL_PRIVATE_KEY || process.env.WALLET_PRIVATE_
 export const solanaWallets: string[] = envWallets.length > 0
   ? envWallets
   : (singleWallet ? [singleWallet] : []);
+
+// Swap engine selection and tuning (default to Jupiter for Phantom-like behavior)
+export const SWAP_ENGINE = (process.env.SWAP_ENGINE || 'jupiter').toLowerCase();
+export const SLIPPAGE_BPS = Number(process.env.SLIPPAGE_BPS || 1500); // 15%
+export const JUPITER_BASE_URL = (process.env.JUPITER_BASE_URL || 'https://quote-api.jup.ag').trim();
+// 'auto' or a number (lamports)
+export const PRIORITY_FEE_LAMPORTS: 'auto' | number = (() => {
+  const v = (process.env.PRIORITY_FEE_LAMPORTS || 'auto').trim();
+  if (v === 'auto') return 'auto';
+  const n = Number(v);
+  return Number.isFinite(n) && n >= 0 ? n : 'auto';
+})();

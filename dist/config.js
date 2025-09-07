@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.solanaWallets = exports.connection = exports.priceFactor = exports.sellInternalDuration = exports.msgCatchInternalDuration = exports.solBuyAmountRange = void 0;
+exports.PRIORITY_FEE_LAMPORTS = exports.JUPITER_BASE_URL = exports.SLIPPAGE_BPS = exports.SWAP_ENGINE = exports.solanaWallets = exports.connection = exports.priceFactor = exports.sellInternalDuration = exports.msgCatchInternalDuration = exports.solBuyAmountRange = void 0;
 const web3_js_1 = require("@solana/web3.js");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -25,3 +25,15 @@ const singleWallet = (process.env.SOL_PRIVATE_KEY || process.env.WALLET_PRIVATE_
 exports.solanaWallets = envWallets.length > 0
     ? envWallets
     : (singleWallet ? [singleWallet] : []);
+// Swap engine selection and tuning (default to Jupiter for Phantom-like behavior)
+exports.SWAP_ENGINE = (process.env.SWAP_ENGINE || 'jupiter').toLowerCase();
+exports.SLIPPAGE_BPS = Number(process.env.SLIPPAGE_BPS || 1500); // 15%
+exports.JUPITER_BASE_URL = (process.env.JUPITER_BASE_URL || 'https://quote-api.jup.ag').trim();
+// 'auto' or a number (lamports)
+exports.PRIORITY_FEE_LAMPORTS = (() => {
+    const v = (process.env.PRIORITY_FEE_LAMPORTS || 'auto').trim();
+    if (v === 'auto')
+        return 'auto';
+    const n = Number(v);
+    return Number.isFinite(n) && n >= 0 ? n : 'auto';
+})();

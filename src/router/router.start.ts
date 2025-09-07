@@ -13,17 +13,20 @@ import { sellInternalDuration, connection, solanaWallets } from "../config";
 import { verifyAddress, getRandomArbitrary } from "../util/helper";
 import { solBuyAmountRange } from "../config";
 import { addressType } from "../util/types";
+import { getSignalMeta } from "../util/signalState";
 import { Keypair } from "@solana/web3.js";
 import bs58 from "bs58";
 import { TOKEN_PROGRAM_ID } from '@raydium-io/raydium-sdk';
 import { appLogger, tradeLogger, childLogger } from "../util/logger";
+import { setCurrentChat } from "../util/notifier";
 
 const startRouter = (bot: TelegramBot) => {
     // Session state for each chat
     const sessions: any = {};
     // Dashboard state per chat
-    // Use NodeJS.Timeout (or ReturnType<typeof setInterval>) for Node compatibility
-    const dashboards: Record<number, { interval: NodeJS.Timeout, messageId: number } | undefined> = {};
+    // Track lastText to avoid Telegram "message is not modified" errors
+    // Use optional interval for initialization before starting the timer
+    const dashboards: Record<number, { interval?: NodeJS.Timeout, messageId: number, lastText?: string } | undefined> = {};
     let globalChatId: any;
     let autoBuyEnabled = false; // toggled by UI
     const log = childLogger(appLogger, 'Router');
@@ -96,8 +99,9 @@ const startRouter = (bot: TelegramBot) => {
     bot.onText(/\/start/, (msg: any) => {
         const chatId = msg.chat.id;
         if (!isAuthorizedChat(chatId)) return;
+        setCurrentChat(chatId);
         log.info("/start received", { chatId });
-        const welcomeMessage = "🍄 Welcome to my soltank_bot!\n\n`AAEuA3DeoblV-LZQwoexDgWJoM2Tg0-E2Ns                                   `\n\n`https://t.me/mysol_tankbot`\n\n 🥞 Please choose a category below:";
+        const welcomeMessage = "💩 Welcome to the shit show losers!\n\nLETS FUCKING GET THIS SHIT MOVING!\n\nCLICK SOME SHIT BELOW\n\n⬇️ ⬇️ ⬇️";
         bot.sendMessage(chatId, welcomeMessage, options);
     });
 
@@ -109,6 +113,7 @@ const startRouter = (bot: TelegramBot) => {
         // Allow Help to work regardless of chat restrictions
         if (!isAuthorizedChat(chatId) && category !== "help") return;
         globalChatId = chatId;
+        setCurrentChat(chatId);
 
         let tokenSellInterval;
 
@@ -161,12 +166,15 @@ const startRouter = (bot: TelegramBot) => {
                 if (dashboards[chatId]?.interval) {
                     clearInterval(dashboards[chatId]!.interval);
                 }
-                const sent = await bot.sendMessage(chatId, "📊 Initializing live dashboard...", {
+                const initText = "📊 Initializing live dashboard...";
+                const sent = await bot.sendMessage(chatId, initText, {
                     reply_markup: {
                         inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]]
                     }
                 });
                 const messageId = sent.message_id;
+                // Initialize dashboard state for this chat
+                dashboards[chatId] = { messageId, lastText: initText };
                 const render = async () => {
                     try {
                         // Load wallet SPL token balances and show only held positions.
@@ -198,7 +206,11 @@ const startRouter = (bot: TelegramBot) => {
                                 "◎ SOL Balances:",
                                 ...(solLines.length ? solLines : ["(no wallets configured)"])
                             ].join("\n");
-                            await bot.editMessageText(noPosText, { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
+                            // Only edit if content changed to avoid 400 "message is not modified"
+                            if (dashboards[chatId]?.lastText !== noPosText) {
+                                await bot.editMessageText(noPosText, { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
+                                if (dashboards[chatId]) dashboards[chatId]!.lastText = noPosText;
+                            }
                             return;
                         }
 
@@ -228,14 +240,21 @@ const startRouter = (bot: TelegramBot) => {
 
                         let text = lines.join("\n");
                         if (text.length > 3900) text = text.slice(0, 3900) + "\n...";
-                        await bot.editMessageText(text, { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
+                        // Only edit if content changed to avoid 400 "message is not modified"
+                        if (dashboards[chatId]?.lastText !== text) {
+                            await bot.editMessageText(text, { chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: [[{ text: "🛑 Stop Dashboard", callback_data: "stop_dashboard" }]] } });
+                            if (dashboards[chatId]) dashboards[chatId]!.lastText = text;
+                        }
                     } catch (e) {
                         log.error("Dashboard render error", e);
                     }
                 };
                 await render();
                 const interval = setInterval(render, 4000);
-                dashboards[chatId] = { interval, messageId };
+                if (!dashboards[chatId]) {
+                    dashboards[chatId] = { messageId, lastText: undefined };
+                }
+                dashboards[chatId]!.interval = interval;
             } catch (e) {
                 log.error("Live dashboard error", e);
                 await bot.sendMessage(chatId, `Failed to start dashboard: ${e}`);
@@ -369,26 +388,49 @@ const startRouter = (bot: TelegramBot) => {
     bot.on("message", async (msg: any) => {
         const chatId = msg.chat.id;
         if (!isAuthorizedChat(chatId)) return;
+        setCurrentChat(chatId);
         const session = sessions[chatId];
 
         if (!session) return; // Ignore messages if session isn't initialized
 
         // Manual flow: token address entry
         if (session.waitingForTokenAddress) {
-            const tokenAddress = msg.text.trim();
-            if (tokenAddress) {
-                log.info("Manual token address entered", { chatId, tokenAddress });
+            const raw = (msg.text || '').trim();
+            if (raw) {
+                // Normalize common share formats (e.g., gmgn "<mint>pump")
+                let tokenAddress = raw;
+                const base58Matches: string[] = Array.from(new Set<string>(((raw.match(/[1-9A-HJ-NP-Za-km-z]{32,44}/g) || []) as string[])));
+                for (const cand of base58Matches) {
+                    if (verifyAddress(cand) === addressType.SOLANA) { tokenAddress = cand; break; }
+                }
+                if (tokenAddress.toLowerCase().endsWith('pump')) {
+                    const trimmed = tokenAddress.slice(0, -4);
+                    if (verifyAddress(trimmed) === addressType.SOLANA) tokenAddress = trimmed;
+                }
+
+                const kind = verifyAddress(tokenAddress);
+                log.info("Manual token address entered", { chatId, tokenAddress, valid: kind === addressType.SOLANA });
+
+                if (kind !== addressType.SOLANA) {
+                    await bot.sendMessage(chatId, "❌ Invalid Solana mint address. Please paste a 32–44 char base58 mint (e.g., So111... for SOL). If you pasted a gmgn/pump link, send just the mint.");
+                    return; // keep session to allow re-entry
+                }
+
                 session.tokenAddress = tokenAddress;
                 session.waitingForTokenAddress = false;      
-                await bot.sendMessage(chatId, `👌 Success! Ready for swap ...                                                 \n\n💰 Amount: ${session.amount.toFixed(6)} SOL           \n🤝 Token Address: ${tokenAddress}`);
-                // console.log("----***--SwapConfig---***---", swapConfig(tokenAddress, session.amount));
+                await bot.sendMessage(chatId, `👌 Received. Attempting swap ...                                                 \n\n💰 Amount: ${session.amount.toFixed(6)} SOL           \n🤝 Token Address: ${tokenAddress}`);
                 await bot.sendMessage(chatId, `Token: ${tokenAddress}, Amount: ${session.amount} SOL`);
-                if (createSignal(tokenAddress, session.amount)){
+
+                const ok = createSignal(tokenAddress, session.amount);
+                if (ok) {
                     tlog.info("Manual buy signal created", { tokenAddress, amount: session.amount });
                     await tokenBuy();
+                    // Do not claim success here; trading path will log and DB will reflect results
+                    await bot.sendMessage(chatId, "📨 Buy request queued. I’ll report results here.", selectedBuyOptions);
+                } else {
+                    // Address is verified above; a false here most likely means update/duplicate buy skipped
+                    await bot.sendMessage(chatId, "⏭️ Buy skipped: this looks like an update/duplicate for a token already bought.");
                 }
-                await bot.sendMessage(chatId, "🏆 Choose your buy method:                  ", selectedBuyOptions);
-                await bot.sendMessage(chatId, "Buy Success!      \nIf you want to stop manual token buy, please click Stop button...", stopOptions);
                 delete sessions[chatId]; // Clear session after completion
             }
         } else if (session.waitingForAmount) {
@@ -479,9 +521,11 @@ const startRouter = (bot: TelegramBot) => {
                     } else {
                         const amount = getRandomArbitrary(solBuyAmountRange[0], solBuyAmountRange[1]);
                         if (createSignal(candidate, amount, 'buy')) {
-                            tlog.info("Auto Buy triggered", { token: candidate, amount });
+                            const meta = getSignalMeta(candidate, 'buy');
+                            const kind = (meta && meta.count === 1) ? 'initial' : 'update';
+                            tlog.info("Auto Buy triggered", { token: candidate, amount, kind, version: meta?.count });
                             await tokenBuy();
-                            await bot.sendMessage(chatId, `Auto Buy triggered for ${candidate}\nAmount: ${amount.toFixed(6)} SOL`);
+                            await bot.sendMessage(chatId, `Auto Buy (${kind}) for ${candidate}\nAmount: ${amount.toFixed(6)} SOL`);
                             break; // one token per message
                         }
                     }

@@ -13,12 +13,12 @@ const helper_2 = require("../util/helper");
 const config_1 = require("../config");
 const db_1 = require("../util/db");
 const logger_1 = require("../util/logger");
+const notifier_1 = require("../util/notifier");
 /**
  * Performs a token swap on the Raydium protocol.
  * Depending on the configuration, it can execute the swap or simulate it.
  */
 const raydiumSwap = async (signal, sell = false, signalNumber) => {
-    var _a, _b, _c, _d;
     try {
         const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'Raydium');
         if (!config_1.solanaWallets[0]) {
@@ -43,8 +43,8 @@ const raydiumSwap = async (signal, sell = false, signalNumber) => {
             tokenBAddress = signal.contractAddress.toString();
             tokenAAmount = parseFloat(signal.amount.toString().split("SOL")[0]);
             tokenAPrice = await (0, helper_2.getSolanaTokenPrice)(tokenAAddress); // Sol price;
-            tlog.info(`tokenAPrice`, { usdPrice: tokenAPrice === null || tokenAPrice === void 0 ? void 0 : tokenAPrice.usdPrice });
-            if ((tokenAPrice === null || tokenAPrice === void 0 ? void 0 : tokenAPrice.usdPrice) === undefined)
+            tlog.info(`tokenAPrice`, { usdPrice: tokenAPrice?.usdPrice });
+            if (tokenAPrice?.usdPrice === undefined)
                 return;
         }
         /**
@@ -54,6 +54,7 @@ const raydiumSwap = async (signal, sell = false, signalNumber) => {
         // console.log("poolInfo", poolInfo);
         if (!poolInfo) {
             tlog.warn("Pool info not found", { tokenAAddress, tokenBAddress });
+            await (0, notifier_1.notify)(`⚠️ No Raydium pool found for pair\nA: ${tokenAAddress}\nB: ${tokenBAddress}`);
             return;
         }
         tlog.info('Found pool info');
@@ -68,7 +69,7 @@ const raydiumSwap = async (signal, sell = false, signalNumber) => {
         else { //buy
             accountAddress = await (0, helper_1.getTokenAccountByOwnerAndMint)(config_1.solanaWallets[0], tokenBAddress);
             tlog.debug("Buy accountAddress", { accountAddress });
-            if (((_b = (_a = accountAddress === null || accountAddress === void 0 ? void 0 : accountAddress.value) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.pubkey) === undefined) {
+            if (accountAddress?.value?.[0]?.pubkey === undefined) {
                 // const createTokenAtaInst = await raydiumSwap.createAssociatedTokenAccount(tokenBAddress);
                 // if (createTokenAtaInst) {
                 //   // instructions.push(createTokenAtaInst);
@@ -99,11 +100,12 @@ const raydiumSwap = async (signal, sell = false, signalNumber) => {
             const res = await raydiumSwap.sendVersionedTransaction(tx, swapConfig_1.default.maxRetries, recentBlockhash);
             if (res) { //&& await raydiumSwap.checkTranactionSuccess(txid)
                 tlog.info('Swap success');
+                await (0, notifier_1.notifySwapResult)({ action: sell ? 'sell' : 'buy', token: sell ? tokenAAddress : tokenBAddress, amount: sell ? undefined : tokenAAmount, success: true, txid: String(res) });
                 if (!sell) {
                     /**
                      * Get token account if new token account was created.
                      */
-                    if (((_c = accountAddress === null || accountAddress === void 0 ? void 0 : accountAddress.value[0]) === null || _c === void 0 ? void 0 : _c.pubkey) === undefined) {
+                    if (accountAddress?.value[0]?.pubkey === undefined) {
                         while (1) {
                             accountAddress = await (0, helper_1.getTokenAccountByOwnerAndMint)(config_1.solanaWallets[0], tokenBAddress);
                             if (accountAddress != "empty")
@@ -112,7 +114,7 @@ const raydiumSwap = async (signal, sell = false, signalNumber) => {
                     }
                     const afterBalance = await (0, helper_1.getTokenBalance)(accountAddress.value[0].pubkey);
                     tlog.info(`tokenB balance after buy`, { afterBalance });
-                    const tokenUsdPrice = ((tokenAPrice === null || tokenAPrice === void 0 ? void 0 : tokenAPrice.usdPrice) || 0) * tokenAAmount / ((afterBalance ? afterBalance : 0) - initialBalance) * (10 ** (2 * poolInfo.quoteDecimals - 9));
+                    const tokenUsdPrice = (tokenAPrice?.usdPrice || 0) * tokenAAmount / ((afterBalance ? afterBalance : 0) - initialBalance) * (10 ** (2 * poolInfo.quoteDecimals - 9));
                     /**
                      * Save buy result.
                      */
@@ -141,7 +143,9 @@ const raydiumSwap = async (signal, sell = false, signalNumber) => {
              * Simulate the transaction and log the result.
              */
             const simRes = await raydiumSwap.simulateVersionedTransaction(tx);
-            tlog.warn("Simulation result", { err: (_d = simRes.value) === null || _d === void 0 ? void 0 : _d.err });
+            const err = simRes.value?.err;
+            tlog.warn("Simulation result", { err });
+            await (0, notifier_1.notifySwapResult)({ action: sell ? 'sell' : 'buy', token: sell ? tokenAAddress : tokenBAddress, amount: sell ? undefined : tokenAAmount, success: !Boolean(err), simulated: true, error: err });
             tlog.debug("Simulation detail", simRes);
         }
     }
@@ -149,6 +153,10 @@ const raydiumSwap = async (signal, sell = false, signalNumber) => {
         (0, helper_2.Delay)(5000);
         const tlog = (0, logger_1.childLogger)(logger_1.tradeLogger, 'Raydium');
         tlog.error('Raydium swap error', err);
+        try {
+            await (0, notifier_1.notifySwapResult)({ action: signal?.action || 'buy', token: signal?.contractAddress?.toString?.() ?? 'unknown', amount: Number(String(signal?.amount || '').split(' ')[0] || '0'), success: false, error: err });
+        }
+        catch { }
     }
 };
 /**

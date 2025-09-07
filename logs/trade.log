@@ -7561,3 +7561,1793 @@
 [2025-09-03T19:12:32.354Z] [ERROR] [TRADE] Raydium: Raydium swap error {"name":"Error","message":"bad secret key size","stack":"Error: bad secret key size\n    at Function.fromSecretKey (/home/shit/hellyeabrother/node_modules/@solana/web3.js/src/keypair.ts:56:13)\n    at new RaydiumSwap (/home/shit/hellyeabrother/src/Raydium/RaydiumSwap.ts:39:38)\n    at raydiumSwap (/home/shit/hellyeabrother/src/Raydium/raydium.ts:31:25)\n    at raydiumToken (/home/shit/hellyeabrother/src/Raydium/raydium.ts:176:13)\n    at runTrade (/home/shit/hellyeabrother/src/startTrade.ts:229:23)\n    at Timeout.tokenSell [as _onTimeout] (/home/shit/hellyeabrother/src/startTrade.ts:204:25)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
 [2025-09-03T19:12:32.354Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
 [2025-09-03T19:12:32.355Z] [ERROR] [TRADE] Raydium: Raydium swap error {"name":"Error","message":"bad secret key size","stack":"Error: bad secret key size\n    at Function.fromSecretKey (/home/shit/hellyeabrother/node_modules/@solana/web3.js/src/keypair.ts:56:13)\n    at new RaydiumSwap (/home/shit/hellyeabrother/src/Raydium/RaydiumSwap.ts:39:38)\n    at raydiumSwap (/home/shit/hellyeabrother/src/Raydium/raydium.ts:31:25)\n    at raydiumToken (/home/shit/hellyeabrother/src/Raydium/raydium.ts:176:13)\n    at runTrade (/home/shit/hellyeabrother/src/startTrade.ts:229:23)\n    at Timeout.tokenSell [as _onTimeout] (/home/shit/hellyeabrother/src/startTrade.ts:204:25)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+[2025-09-05T00:21:38.579Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:21:38.588Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:21:38.589Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:21:38.789Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:21:39.591Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:21:40.357Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:21:40.357Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:21:40.357Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:21:40.358Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:21:40.358Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:21:40.358Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:21:40.358Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:21:40.359Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:21:40.359Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:21:48.842Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","isAddress":0}
+[2025-09-05T00:21:48.842Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","amount":0.000030327885868889694,"action":"buy"}
+[2025-09-05T00:21:48.843Z] [INFO] [TRADE] Router: Auto Buy triggered {"token":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","amount":0.000030327885868889694}
+[2025-09-05T00:21:48.843Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-05T00:21:48.843Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0],"length":1}
+[2025-09-05T00:21:48.843Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":0,"contractAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","action":"buy","amount":"0.000030327885868889694 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-05T00:21:48.843Z"},"signalNumber":0}
+[2025-09-05T00:21:48.843Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:21:48.846Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-05T00:21:49.061Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:21:49.063Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:21:49.063Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:21:49.263Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:21:49.603Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:21:49.954Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:21:49.954Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:21:49.955Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:21:49.955Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:21:49.955Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:21:49.955Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:21:49.955Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:21:49.955Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:21:49.955Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:21:59.062Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:21:59.063Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:21:59.063Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:21:59.263Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:21:59.574Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:21:59.842Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:21:59.843Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:21:59.843Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:21:59.843Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:21:59.843Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:21:59.843Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:21:59.843Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:21:59.843Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:21:59.844Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:09.061Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:22:09.062Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:22:09.062Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:22:09.262Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:22:09.974Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:22:10.314Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:22:10.314Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:22:10.314Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:22:10.314Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:22:10.314Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:22:10.314Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:22:10.314Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:10.314Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:22:10.315Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:17.226Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-05T00:22:17.226Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0],"length":1}
+[2025-09-05T00:22:17.226Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":0,"contractAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","action":"buy","amount":"0.000030327885868889694 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-05T00:21:48.843Z"},"signalNumber":0}
+[2025-09-05T00:22:17.226Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:17.226Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-05T00:22:19.583Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:22:19.584Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:22:19.584Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:22:19.785Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:22:20.098Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:22:20.167Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:22:20.167Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:22:20.167Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:22:20.167Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:22:20.167Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:22:20.168Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:22:20.168Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:20.168Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:22:20.168Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:29.585Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:22:29.586Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:22:29.586Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:22:29.787Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:22:30.119Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:22:30.190Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:22:30.190Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:22:30.191Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:22:30.191Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:22:30.191Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:22:30.191Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:22:30.191Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:30.191Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:22:30.191Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:39.586Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:22:39.587Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:22:39.588Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:22:39.788Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:22:40.138Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:22:40.675Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:22:40.675Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:22:40.675Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:22:40.676Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:22:40.676Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:22:40.676Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:22:40.676Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:40.676Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:22:40.677Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:50.059Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:22:50.061Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:22:50.062Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:22:50.261Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:22:50.787Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:22:50.976Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:22:50.976Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:22:50.976Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:22:50.977Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:22:50.977Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:22:50.977Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:22:50.977Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:22:50.977Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:22:50.977Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:00.060Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:00.061Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:00.061Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:00.262Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:00.572Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:01.100Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:01.101Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:01.101Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:01.101Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:01.101Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:01.101Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:01.101Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:01.101Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:01.101Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:10.062Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:10.063Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:10.064Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:10.263Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:10.764Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:10.846Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:10.847Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:10.847Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:10.847Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:10.847Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:10.847Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:10.847Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:10.848Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:10.848Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:17.555Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","isAddress":0}
+[2025-09-05T00:23:17.556Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","amount":0.000016611176129690738,"action":"buy"}
+[2025-09-05T00:23:17.556Z] [INFO] [TRADE] Router: Auto Buy triggered {"token":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","amount":0.000016611176129690738}
+[2025-09-05T00:23:17.557Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-05T00:23:17.557Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0,1],"length":2}
+[2025-09-05T00:23:17.557Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":0,"contractAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","action":"buy","amount":"0.000030327885868889694 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-05T00:21:48.843Z"},"signalNumber":0}
+[2025-09-05T00:23:17.558Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:17.558Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"Cy2o2M4Y8NwyQ4BF7b5y2vwK4xSEB2NB7sP4xt59pump","action":"buy","amount":"0.000016611176129690738 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-05T00:23:17.556Z"},"signalNumber":1}
+[2025-09-05T00:23:17.559Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:17.559Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-05T00:23:20.064Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:20.065Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:20.066Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:20.266Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:20.710Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:20.711Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:20.712Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:20.912Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:20.979Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:21.122Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:21.122Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:21.123Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:21.123Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:21.123Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:21.123Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:21.123Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:21.123Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:21.124Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:21.208Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:21.293Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:21.294Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:21.294Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:21.294Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:21.294Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:21.295Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:21.295Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:21.295Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:21.295Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:30.592Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:30.593Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:30.593Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:30.794Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:31.237Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:31.239Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:31.239Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:31.294Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:31.356Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:31.357Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:31.357Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:31.357Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:31.357Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:31.357Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:31.358Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:31.358Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:31.358Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:31.441Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:31.894Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:32.292Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:32.292Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:32.292Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:32.293Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:32.293Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:32.293Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:32.293Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:32.293Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:32.294Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:40.594Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:40.595Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:40.595Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:40.795Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:41.110Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:41.177Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:41.177Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:41.177Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:41.177Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:41.177Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:41.177Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:41.177Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:41.177Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:41.178Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:41.236Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:41.237Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:41.237Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:41.437Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:42.172Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:42.232Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:42.232Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:42.232Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:42.232Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:42.232Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:42.232Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:42.232Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:42.232Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:42.232Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:50.596Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:50.597Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:50.597Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:50.798Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:51.236Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:23:51.237Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":2}
+[2025-09-05T00:23:51.237Z] [DEBUG] [TRADE] Signals: unique data [{"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","chain":"solana"},{"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","chain":"solana"}]
+[2025-09-05T00:23:51.437Z] [DEBUG] [TRADE] Price: token mint address {"address":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq"}
+[2025-09-05T00:23:51.482Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:51.634Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:51.634Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:51.634Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:51.635Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:51.635Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:51.635Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:51.635Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:51.635Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:51.635Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:51.818Z] [DEBUG] [TRADE] Price: token mint address {"address":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3"}
+[2025-09-05T00:23:51.889Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","usdPrice":0.000001694}
+[2025-09-05T00:23:51.889Z] [DEBUG] [TRADE] Signals: token price {"tokenAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","usdPrice":8.23e-7}
+[2025-09-05T00:23:51.890Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"bzzksrfdpkndrxpbkseerbmw69pqcznqhusxbjm5i9kq","purchasePrice":0.0000483127469289473,"currentPrice":0.000001694,"rate":0.03506321018118336}
+[2025-09-05T00:23:51.890Z] [DEBUG] [TRADE] Signals: price compare {"contractAddress":"fvs9bsm1pshawjmvyegbbpvspsucgxs1qy3llaf7pkn3","purchasePrice":0.0000140224996608756,"currentPrice":8.23e-7,"rate":0.05869139025877572}
+[2025-09-05T00:23:51.890Z] [INFO] [TRADE] Sell: Prepared sell signals {"count":2}
+[2025-09-05T00:23:51.890Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"BZZkSRfdPKNdRxpBkseerBMw69PQCZnqHusxBJM5i9Kq","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":0}
+[2025-09-05T00:23:51.890Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:23:51.890Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"FvS9Bsm1PShAWJmvyEGbBPVSpSuCgXS1qY3LLaF7pKN3","action":"sell","amount":"50","platform":"Raydium","chain":"solana","priceFactor":0},"signalNumber":1}
+[2025-09-05T00:23:51.890Z] [ERROR] [TRADE] Raydium: No Solana private key configured. Set `SOLANA_WALLETS` (comma-separated) or `SOL_PRIVATE_KEY` in .env
+[2025-09-05T00:24:01.098Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:01.098Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:01.734Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:01.734Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:11.100Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:11.101Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:11.734Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:11.735Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:21.102Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:21.104Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:21.735Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:21.736Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:31.632Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:31.632Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:32.262Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:32.263Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:41.635Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:41.636Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:42.262Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:42.263Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:51.639Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:51.644Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:24:52.263Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:24:52.264Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:01.645Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:01.645Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:02.264Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:02.265Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:11.646Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:11.646Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:12.266Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:12.266Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:21.648Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:21.650Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:22.267Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:22.267Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:31.651Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:31.652Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:32.735Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:32.735Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:42.120Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:42.122Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:42.736Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:42.737Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:52.121Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:52.122Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:25:52.737Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:25:52.737Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:02.122Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:02.123Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:02.738Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:02.738Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:12.591Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:12.592Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:13.207Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:13.207Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:22.591Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:22.592Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:23.208Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:23.209Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:32.591Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:32.592Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:33.209Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:33.209Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:43.085Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:43.086Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:43.704Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:43.706Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:53.086Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:53.087Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:26:53.706Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:26:53.706Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:03.090Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:03.091Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:03.706Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:03.706Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:13.608Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:13.609Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:14.218Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:14.219Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:23.612Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:23.613Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:24.218Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:24.219Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:33.617Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:33.618Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:34.219Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:34.220Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:44.151Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:44.152Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:44.746Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:44.747Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:54.157Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:54.157Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:27:54.747Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:27:54.748Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:04.159Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:04.160Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:04.749Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:04.749Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:14.166Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:14.167Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:14.749Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:14.750Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:24.690Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:24.691Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:25.265Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:25.266Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:34.692Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:34.693Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:35.265Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:35.265Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:44.696Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:44.697Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:45.265Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:45.266Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:55.214Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:55.214Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:28:55.783Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:28:55.784Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:05.219Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:05.219Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:05.783Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:05.784Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:15.224Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:15.225Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:15.783Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:15.784Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:25.738Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:25.739Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:26.293Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:26.293Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:35.742Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:35.744Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:36.293Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:36.294Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:45.747Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:45.748Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:46.293Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:46.294Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:56.245Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:56.246Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:29:56.788Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:29:56.789Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:06.250Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:06.251Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:06.789Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:06.790Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:16.256Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:16.257Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:16.790Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:16.791Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:26.261Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:26.262Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:27.277Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:27.278Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:36.752Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:36.753Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:37.278Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:37.279Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:46.753Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:46.754Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:47.279Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:47.280Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:56.757Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:56.758Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:30:57.279Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:30:57.280Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:07.256Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:07.257Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:07.775Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:07.776Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:17.260Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:17.261Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:17.775Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:17.780Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:27.262Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:27.263Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:27.775Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:27.776Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:37.751Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:37.752Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:38.262Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:38.263Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:47.754Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:47.755Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:48.263Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:48.263Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:57.756Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:57.757Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:31:58.264Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:31:58.264Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:08.253Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:08.255Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:08.760Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:08.761Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:18.254Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:18.255Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:18.761Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:18.764Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:28.255Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:28.256Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:28.761Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:28.762Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:38.751Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:38.752Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:39.256Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:39.257Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:48.753Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:48.754Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:49.256Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:49.257Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:58.753Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:58.754Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:32:59.257Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:32:59.258Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:08.754Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:08.755Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:09.257Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:09.258Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:19.308Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:19.308Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:19.811Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:19.812Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:29.308Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:29.309Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:29.812Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:29.813Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:39.308Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:39.309Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:39.812Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:39.813Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:49.814Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:49.815Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:50.308Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:50.309Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:33:59.822Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:33:59.828Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:00.308Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:00.310Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:09.831Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:09.833Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:10.309Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:10.310Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:20.332Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:20.335Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:20.801Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:20.809Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:30.341Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:30.343Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:30.802Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:30.803Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:40.350Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:40.351Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:40.803Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:40.804Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:50.857Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:50.858Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:34:51.303Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:34:51.304Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:00.864Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:00.868Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:01.304Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:01.306Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:10.872Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:10.873Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:11.303Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:11.304Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:20.880Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:20.881Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:21.303Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:21.304Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:31.380Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:31.381Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:31.798Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:31.798Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:41.386Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:41.388Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:41.799Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:41.799Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:51.393Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:51.393Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:35:51.799Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:35:51.800Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:01.880Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:01.881Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:02.282Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:02.283Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:11.885Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:11.886Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:12.283Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:12.284Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:21.891Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:21.891Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:22.284Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:22.285Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:32.396Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:32.396Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:32.785Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:32.786Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:42.401Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:42.403Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:42.786Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:42.786Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:52.406Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:52.409Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:36:52.787Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:36:52.791Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:02.968Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:02.971Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:03.332Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:03.337Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:12.958Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:12.964Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:13.332Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:13.333Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:22.962Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:22.967Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:23.332Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:23.333Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:33.463Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:33.466Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:33.832Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:33.834Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:43.467Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:43.468Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:43.833Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:43.834Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:53.470Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:53.472Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:37:53.833Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:37:53.838Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:03.474Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:03.475Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:03.833Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:03.835Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:13.991Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:13.993Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:14.348Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:14.349Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:23.993Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:23.994Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:24.349Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:24.349Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:33.996Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:33.998Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:34.349Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:34.351Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:44.506Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:44.507Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:44.857Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:44.858Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:54.507Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:54.509Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:38:54.856Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:38:54.862Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:04.515Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:04.515Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:04.857Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:04.858Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:15.032Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:15.033Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:15.374Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:15.375Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:25.033Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:25.034Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:25.375Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:25.375Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:35.033Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:35.034Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:35.375Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:35.375Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:45.552Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:45.553Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:45.894Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:45.895Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:55.552Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:55.553Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:39:55.895Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:39:55.896Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:05.552Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:05.553Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:05.895Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:05.896Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:15.552Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:15.553Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:15.896Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:15.898Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:26.076Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:26.077Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:26.412Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:26.413Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:36.080Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:36.081Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:36.412Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:36.413Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:46.086Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:46.088Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:46.413Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:46.414Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:56.626Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:56.630Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:40:56.966Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:40:56.967Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:41:06.632Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:41:06.633Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T00:41:06.967Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T00:41:06.968Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T01:51:30.257Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-05T01:51:30.257Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[],"length":0}
+[2025-09-05T01:51:30.257Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-05T02:19:42.621Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:19:42.649Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:19:52.616Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:19:52.617Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:20:02.617Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:20:02.620Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:20:12.619Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:20:12.620Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:20:22.620Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:20:22.621Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:20:32.624Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:20:32.626Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:20:42.624Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:20:42.626Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:20:52.625Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:20:52.627Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:21:02.626Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-05T02:21:02.627Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-05T02:35:20.266Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"6zsNXPkpGHaf8p71wThVTxr5fhtG8yKHw2TrkiKqpump","isAddress":0}
+[2025-09-05T02:35:20.267Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"6zsNXPkpGHaf8p71wThVTxr5fhtG8yKHw2TrkiKqpump","amount":0.001,"action":"buy"}
+[2025-09-05T02:35:20.267Z] [INFO] [TRADE] Router: Manual buy signal created {"tokenAddress":"6zsNXPkpGHaf8p71wThVTxr5fhtG8yKHw2TrkiKqpump","amount":0.001}
+[2025-09-05T02:35:20.268Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-05T02:35:20.268Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0],"length":1}
+[2025-09-05T02:35:20.269Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":0,"contractAddress":"6zsNXPkpGHaf8p71wThVTxr5fhtG8yKHw2TrkiKqpump","action":"buy","amount":"0.001 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-05T02:35:20.267Z"},"signalNumber":0}
+[2025-09-05T02:35:20.275Z] [INFO] [TRADE] RaydiumSwap: Wallet initialized {"publicKey":"DZ2naxLU5FF98iC3ohkAbWnB3hG8E5ogRybfCQjDkk5P"}
+[2025-09-05T02:35:20.276Z] [INFO] [TRADE] Raydium: Raydium swap initialized
+[2025-09-05T02:35:20.480Z] [DEBUG] [TRADE] Price: token mint address {"address":"So11111111111111111111111111111111111111112"}
+[2025-09-05T02:35:21.107Z] [INFO] [TRADE] Raydium: tokenAPrice {"usdPrice":203.791959183}
+[2025-09-05T02:35:21.108Z] [DEBUG] [TRADE] RaydiumSwap: Falconhit api key present {"present":true}
+[2025-09-05T02:35:22.213Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: getaddrinfo ENOTFOUND valguibs.com
+[2025-09-05T02:35:23.269Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: getaddrinfo ENOTFOUND valguibs.com
+[2025-09-05T02:35:24.326Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: getaddrinfo ENOTFOUND valguibs.com
+[2025-09-05T02:35:24.327Z] [WARN] [TRADE] Raydium: Pool info not found {"tokenAAddress":"So11111111111111111111111111111111111111112","tokenBAddress":"6zsNXPkpGHaf8p71wThVTxr5fhtG8yKHw2TrkiKqpump"}
+[2025-09-05T02:35:24.327Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-06T15:57:10.690Z] [DEBUG] [TRADE] Price: token mint address {"address":"DAx4aHH6qzZzH1pqMvsou4ASfsQxJq9obmA99cAqpump"}
+[2025-09-06T15:57:11.514Z] [DEBUG] [TRADE] Price: token mint address {"address":"5v4o7M1w91FdC3AXgr47a6y5yAHfQBfHAdJ42mUxpump"}
+[2025-09-06T15:57:16.502Z] [DEBUG] [TRADE] Price: token mint address {"address":"DAx4aHH6qzZzH1pqMvsou4ASfsQxJq9obmA99cAqpump"}
+[2025-09-06T15:57:17.364Z] [DEBUG] [TRADE] Price: token mint address {"address":"5v4o7M1w91FdC3AXgr47a6y5yAHfQBfHAdJ42mUxpump"}
+[2025-09-06T15:57:20.493Z] [DEBUG] [TRADE] Price: token mint address {"address":"DAx4aHH6qzZzH1pqMvsou4ASfsQxJq9obmA99cAqpump"}
+[2025-09-06T15:57:20.853Z] [DEBUG] [TRADE] Price: token mint address {"address":"5v4o7M1w91FdC3AXgr47a6y5yAHfQBfHAdJ42mUxpump"}
+[2025-09-06T15:57:24.477Z] [DEBUG] [TRADE] Price: token mint address {"address":"DAx4aHH6qzZzH1pqMvsou4ASfsQxJq9obmA99cAqpump"}
+[2025-09-06T15:57:24.733Z] [DEBUG] [TRADE] Price: token mint address {"address":"5v4o7M1w91FdC3AXgr47a6y5yAHfQBfHAdJ42mUxpump"}
+[2025-09-06T15:57:28.447Z] [DEBUG] [TRADE] Price: token mint address {"address":"DAx4aHH6qzZzH1pqMvsou4ASfsQxJq9obmA99cAqpump"}
+[2025-09-06T15:57:28.710Z] [DEBUG] [TRADE] Price: token mint address {"address":"5v4o7M1w91FdC3AXgr47a6y5yAHfQBfHAdJ42mUxpump"}
+[2025-09-06T16:16:16.004Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:16:16.008Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:16:26.006Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:16:26.008Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:16:36.013Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:16:36.014Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:16:46.019Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:16:46.020Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:16:56.025Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:16:56.030Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:17:06.030Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:17:06.031Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:17:16.030Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:17:16.031Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:17:26.034Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:17:26.035Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:17:36.038Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:17:36.039Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:17:46.038Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:17:46.039Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:17:56.041Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:17:56.042Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:18:06.043Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:18:06.044Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:18:16.045Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:18:16.047Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:18:26.047Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:18:26.048Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:18:36.049Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:18:36.050Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:18:46.050Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:18:46.051Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:18:56.051Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:18:56.052Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:19:06.052Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:19:06.053Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:19:16.062Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:19:16.063Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:19:26.072Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:19:26.073Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:19:36.081Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:19:36.082Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:19:46.090Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:19:46.091Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:19:56.098Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:19:56.099Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:20:06.106Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:20:06.107Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:20:16.113Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:20:16.115Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:20:26.120Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:20:26.122Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:20:36.128Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:20:36.129Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:20:46.134Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:20:46.136Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:20:56.141Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:20:56.142Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:21:06.147Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:21:06.147Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:21:16.151Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:21:16.152Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:21:26.155Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:21:26.156Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:21:36.160Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:21:36.161Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:21:46.163Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:21:46.164Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:21:56.167Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:21:56.167Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:22:06.169Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:22:06.170Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:22:16.173Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:22:16.174Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:22:26.175Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:22:26.175Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:22:36.176Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:22:36.177Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:22:46.178Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:22:46.179Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:22:56.179Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:22:56.180Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:23:06.180Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:23:06.181Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:23:16.181Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:23:16.181Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:23:26.190Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:23:26.191Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:23:36.200Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:23:36.201Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:23:46.210Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:23:46.211Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:23:56.219Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:23:56.220Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:24:06.228Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:24:06.229Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:24:16.237Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:24:16.237Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:24:26.244Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:24:26.245Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:24:36.251Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:24:36.252Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:24:46.258Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:24:46.259Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:24:56.266Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:24:56.267Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:25:06.271Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:25:06.272Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:25:16.277Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:25:16.278Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:25:26.282Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:25:26.283Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:25:36.287Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:25:36.288Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:25:46.291Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:25:46.292Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:25:56.296Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:25:56.296Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:26:06.299Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:26:06.300Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:26:16.303Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:26:16.304Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:26:26.306Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:26:26.307Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:26:36.308Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:26:36.309Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:26:46.310Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:26:46.311Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:26:56.313Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:26:56.314Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:27:06.314Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:27:06.315Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:27:16.315Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:27:16.316Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:27:26.316Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:27:26.317Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:27:36.317Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:27:36.318Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:27:46.328Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:27:46.328Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:27:56.337Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:27:56.338Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:28:06.347Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:28:06.348Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:28:16.357Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:28:16.358Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:28:26.364Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:28:26.365Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:28:36.373Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:28:36.374Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:28:46.380Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:28:46.382Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:28:56.388Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:28:56.389Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:29:06.395Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:29:06.396Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:29:16.402Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:29:16.403Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:29:26.408Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:29:26.409Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:29:36.414Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:29:36.415Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:29:46.424Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:29:46.424Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:29:56.433Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:29:56.434Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:30:06.442Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:30:06.443Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:30:16.451Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:30:16.452Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:30:26.459Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:30:26.460Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:30:36.467Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:30:36.468Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:30:46.475Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:30:46.476Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:30:56.481Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:30:56.482Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:31:06.489Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:31:06.490Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:31:16.495Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:31:16.496Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:31:26.501Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:31:26.502Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:31:36.507Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:31:36.508Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:31:46.512Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:31:46.513Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:31:56.517Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:31:56.518Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:32:06.520Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:32:06.521Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:32:16.524Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:32:16.525Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:32:26.528Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:32:26.529Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:32:36.530Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:32:36.531Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:32:46.533Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:32:46.534Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:32:56.535Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:32:56.536Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:33:06.537Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:33:06.538Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:33:16.539Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:33:16.540Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:33:26.541Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:33:26.542Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:33:36.542Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:33:36.543Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:33:46.542Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:33:46.543Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:33:56.553Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:33:56.554Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:34:06.562Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:34:06.563Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:34:16.571Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:34:16.572Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:34:26.580Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:34:26.581Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:34:36.589Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:34:36.590Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:34:46.596Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:34:46.597Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:34:56.605Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:34:56.606Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:35:06.612Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:35:06.613Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:35:16.619Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:35:16.620Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:35:26.625Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:35:26.627Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:35:36.632Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:35:36.632Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:35:46.637Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:35:46.638Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:35:56.643Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:35:56.644Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:36:06.646Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:36:06.647Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:36:16.650Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:36:16.651Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:36:26.654Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:36:26.655Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:36:36.657Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:36:36.658Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:36:46.660Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:36:46.661Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:36:56.663Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:36:56.664Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:37:06.666Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:37:06.668Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:37:16.667Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:37:16.668Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:37:26.668Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:37:26.669Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:37:36.670Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:37:36.671Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:37:46.671Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:37:46.672Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:37:56.672Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:37:56.673Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:38:06.683Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:38:06.685Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:38:16.693Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:38:16.694Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:38:26.702Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:38:26.703Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:38:36.711Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:38:36.712Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:38:46.720Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:38:46.721Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:38:56.728Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:38:56.729Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:39:06.736Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:39:06.737Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:39:16.742Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:39:16.743Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:39:26.749Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:39:26.750Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:39:36.756Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:39:36.757Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:39:46.763Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:39:46.764Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:39:56.769Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:39:56.770Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:40:06.774Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:40:06.775Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:40:16.779Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:40:16.779Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:40:26.783Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:40:26.783Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:40:36.787Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:40:36.788Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:40:46.792Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:40:46.792Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:40:56.794Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:40:56.795Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:41:06.799Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:41:06.800Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:41:16.802Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:41:16.803Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:41:26.805Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:41:26.806Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:41:36.807Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:41:36.807Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:41:46.809Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:41:46.810Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:41:56.810Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:41:56.811Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:42:06.811Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:42:06.811Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:42:16.812Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:42:16.813Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:42:26.821Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:42:26.822Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:42:36.831Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:42:36.831Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:42:46.840Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:42:46.841Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:42:56.850Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:42:56.850Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:43:06.859Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:43:06.860Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:43:16.868Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:43:16.868Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:43:26.875Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:43:26.876Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:43:36.882Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:43:36.883Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:43:46.889Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:43:46.890Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:43:56.896Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:43:56.897Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:44:06.902Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:44:06.903Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:44:16.908Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:44:16.909Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:44:26.914Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:44:26.915Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:44:36.920Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:44:36.921Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:44:46.925Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:44:46.926Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:44:56.930Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:44:56.931Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:45:06.934Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:45:06.934Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:45:16.936Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:45:16.937Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:45:26.939Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:45:26.940Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:45:36.942Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:45:36.943Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:45:46.944Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:45:46.945Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:45:56.947Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:45:56.948Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:46:06.948Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:46:06.949Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:46:16.950Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:46:16.951Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:46:26.950Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:46:26.951Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:46:36.951Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:46:36.952Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:46:46.960Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:46:46.961Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:46:56.970Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:46:56.971Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:47:06.980Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:47:06.981Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:47:16.989Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:47:16.990Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:47:26.997Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:47:26.998Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:47:37.005Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:47:37.006Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:47:47.012Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:47:47.013Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:47:57.019Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:47:57.020Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:48:07.025Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:48:07.027Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:48:17.031Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:48:17.032Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:48:27.037Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:48:27.038Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:48:37.042Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:48:37.043Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:48:47.047Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:48:47.048Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:48:57.052Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:48:57.052Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:49:07.056Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:49:07.057Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:49:17.059Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:49:17.060Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:49:27.062Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:49:27.063Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:49:37.065Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:49:37.066Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:49:47.067Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:49:47.068Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:49:57.069Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:49:57.070Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:50:07.071Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:50:07.071Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:50:17.071Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:50:17.072Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:50:27.071Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:50:27.072Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:50:37.071Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:50:37.072Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:50:47.081Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:50:47.082Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:50:57.091Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:50:57.091Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:51:07.100Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:51:07.101Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:51:17.109Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:51:17.110Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:51:27.117Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:51:27.118Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:51:37.125Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:51:37.126Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:51:47.133Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:51:47.134Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:51:57.140Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:51:57.141Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:52:07.147Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:52:07.148Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:52:17.154Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:52:17.155Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:52:27.160Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:52:27.161Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:52:37.166Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:52:37.167Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:52:47.172Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:52:47.174Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:52:57.176Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:52:57.177Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:53:07.180Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:53:07.181Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:53:17.184Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:53:17.185Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:53:27.188Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:53:27.189Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:53:37.192Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:53:37.193Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:53:47.195Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:53:47.196Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:53:57.197Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:53:57.198Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:54:07.199Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:54:07.200Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:54:17.200Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:54:17.201Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-06T16:54:27.201Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-06T16:54:27.202Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:12.973Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:00:12.976Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:22.984Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:00:22.985Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:23.393Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","isAddress":0}
+[2025-09-07T20:00:23.393Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.00004240131922858398,"action":"buy"}
+[2025-09-07T20:00:23.393Z] [INFO] [TRADE] Router: Auto Buy triggered {"token":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.00004240131922858398}
+[2025-09-07T20:00:23.393Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-07T20:00:23.394Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0],"length":1}
+[2025-09-07T20:00:23.394Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":0,"contractAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","action":"buy","amount":"0.00004240131922858398 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:00:23.393Z"},"signalNumber":0}
+[2025-09-07T20:00:23.463Z] [INFO] [TRADE] RaydiumSwap: Wallet initialized {"publicKey":"DZ2naxLU5FF98iC3ohkAbWnB3hG8E5ogRybfCQjDkk5P"}
+[2025-09-07T20:00:23.463Z] [INFO] [TRADE] Raydium: Raydium swap initialized
+[2025-09-07T20:00:23.665Z] [DEBUG] [TRADE] Price: token mint address {"address":"So11111111111111111111111111111111111111112"}
+[2025-09-07T20:00:24.599Z] [INFO] [TRADE] Raydium: tokenAPrice {"usdPrice":203.087752559}
+[2025-09-07T20:00:24.599Z] [DEBUG] [TRADE] RaydiumSwap: Using Raydium liquidity list {"url":"https://api.raydium.io/v2/sdk/liquidity/mainnet.json"}
+[2025-09-07T20:00:32.984Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:00:32.988Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:40.666Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: Cannot create a string longer than 0x1fffffe8 characters
+[2025-09-07T20:00:41.643Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:00:41.646Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:42.984Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:00:42.989Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:48.611Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","isAddress":0}
+[2025-09-07T20:00:48.613Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.000015444829738316,"action":"buy"}
+[2025-09-07T20:00:48.613Z] [INFO] [TRADE] Router: Auto Buy triggered {"token":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.000015444829738316}
+[2025-09-07T20:00:48.613Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-07T20:00:48.613Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0,1],"length":2}
+[2025-09-07T20:00:48.614Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":0,"contractAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","action":"buy","amount":"0.00004240131922858398 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:00:23.393Z"},"signalNumber":0}
+[2025-09-07T20:00:48.621Z] [INFO] [TRADE] RaydiumSwap: Wallet initialized {"publicKey":"DZ2naxLU5FF98iC3ohkAbWnB3hG8E5ogRybfCQjDkk5P"}
+[2025-09-07T20:00:48.621Z] [INFO] [TRADE] Raydium: Raydium swap initialized
+[2025-09-07T20:00:48.821Z] [DEBUG] [TRADE] Price: token mint address {"address":"So11111111111111111111111111111111111111112"}
+[2025-09-07T20:00:50.133Z] [INFO] [TRADE] Raydium: tokenAPrice {"usdPrice":202.961405666}
+[2025-09-07T20:00:50.134Z] [DEBUG] [TRADE] RaydiumSwap: Using Raydium liquidity list {"url":"https://api.raydium.io/v2/sdk/liquidity/mainnet.json"}
+[2025-09-07T20:00:51.643Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:00:51.650Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:52.984Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:00:52.989Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:00:55.575Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: Cannot create a string longer than 0x1fffffe8 characters
+[2025-09-07T20:00:56.543Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","isAddress":0}
+[2025-09-07T20:00:56.543Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.000017938408242235403,"action":"buy"}
+[2025-09-07T20:00:56.544Z] [INFO] [TRADE] Router: Auto Buy triggered {"token":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.000017938408242235403}
+[2025-09-07T20:00:56.544Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-07T20:00:56.544Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0,1,2],"length":3}
+[2025-09-07T20:00:56.544Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":0,"contractAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","action":"buy","amount":"0.00004240131922858398 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:00:23.393Z"},"signalNumber":0}
+[2025-09-07T20:00:56.547Z] [INFO] [TRADE] RaydiumSwap: Wallet initialized {"publicKey":"DZ2naxLU5FF98iC3ohkAbWnB3hG8E5ogRybfCQjDkk5P"}
+[2025-09-07T20:00:56.547Z] [INFO] [TRADE] Raydium: Raydium swap initialized
+[2025-09-07T20:00:56.746Z] [DEBUG] [TRADE] Price: token mint address {"address":"So11111111111111111111111111111111111111112"}
+[2025-09-07T20:00:58.315Z] [INFO] [TRADE] Raydium: tokenAPrice {"usdPrice":202.977053393}
+[2025-09-07T20:00:58.316Z] [DEBUG] [TRADE] RaydiumSwap: Using Raydium liquidity list {"url":"https://api.raydium.io/v2/sdk/liquidity/mainnet.json"}
+[2025-09-07T20:01:01.646Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:01.652Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:02.984Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:02.990Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:11.645Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:11.654Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:12.984Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:12.985Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:13.936Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: Cannot create a string longer than 0x1fffffe8 characters
+[2025-09-07T20:01:14.978Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:16.019Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:16.837Z] [ERROR] [TRADE] RaydiumSwap: On-chain pool discovery failed {"name":"SolanaJSONRPCError","message":"failed to get accounts owned by program 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8: Request deprioritized due to number of accounts requested. Please use getProgramAccountsV2 with pagination to handle large datasets. See: https://www.helius.dev/docs/api-reference/rpc/http/getprogramaccountsv2","stack":"SolanaJSONRPCError: failed to get accounts owned by program 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8: Request deprioritized due to number of accounts requested. Please use getProgramAccountsV2 with pagination to handle large datasets. See: https://www.helius.dev/docs/api-reference/rpc/http/getprogramaccountsv2\n    at Connection.getProgramAccounts (/home/shit/hellyeabrother/node_modules/@solana/web3.js/lib/index.cjs.js:6400:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async tryFind (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:114:30)\n    at async RaydiumSwap.getPoolInfoOnChain (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:119:29)\n    at async RaydiumSwap.getPoolInfoByTokenPair (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:93:16)\n    at async raydiumSwap (/home/shit/hellyeabrother/dist/Raydium/raydium.js:54:26)\n    at async raydiumToken (/home/shit/hellyeabrother/dist/Raydium/raydium.js:174:13)\n    at async runTrade (/home/shit/hellyeabrother/dist/startTrade.js:198:9)\n    at async tokenBuy (/home/shit/hellyeabrother/dist/startTrade.js:124:13)\n    at async TelegramBot.<anonymous> (/home/shit/hellyeabrother/dist/router/router.start.js:553:29)","code":-32600}
+[2025-09-07T20:01:16.840Z] [WARN] [TRADE] Raydium: Pool info not found {"tokenAAddress":"So11111111111111111111111111111111111111112","tokenBAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:01:17.544Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","action":"buy","amount":"0.000015444829738316 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:00:48.613Z"},"signalNumber":1}
+[2025-09-07T20:01:17.547Z] [INFO] [TRADE] RaydiumSwap: Wallet initialized {"publicKey":"DZ2naxLU5FF98iC3ohkAbWnB3hG8E5ogRybfCQjDkk5P"}
+[2025-09-07T20:01:17.547Z] [INFO] [TRADE] Raydium: Raydium swap initialized
+[2025-09-07T20:01:17.747Z] [DEBUG] [TRADE] Price: token mint address {"address":"So11111111111111111111111111111111111111112"}
+[2025-09-07T20:01:18.231Z] [INFO] [TRADE] Raydium: tokenAPrice {"usdPrice":203.128005432}
+[2025-09-07T20:01:18.231Z] [DEBUG] [TRADE] RaydiumSwap: Using Raydium liquidity list {"url":"https://api.raydium.io/v2/sdk/liquidity/mainnet.json"}
+[2025-09-07T20:01:20.353Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: Cannot create a string longer than 0x1fffffe8 characters
+[2025-09-07T20:01:20.367Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:21.047Z] [ERROR] [TRADE] RaydiumSwap: On-chain pool discovery failed {"name":"SolanaJSONRPCError","message":"failed to get accounts owned by program 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8: Request deprioritized due to number of accounts requested. Please use getProgramAccountsV2 with pagination to handle large datasets. See: https://www.helius.dev/docs/api-reference/rpc/http/getprogramaccountsv2","stack":"SolanaJSONRPCError: failed to get accounts owned by program 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8: Request deprioritized due to number of accounts requested. Please use getProgramAccountsV2 with pagination to handle large datasets. See: https://www.helius.dev/docs/api-reference/rpc/http/getprogramaccountsv2\n    at Connection.getProgramAccounts (/home/shit/hellyeabrother/node_modules/@solana/web3.js/lib/index.cjs.js:6400:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async tryFind (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:114:30)\n    at async RaydiumSwap.getPoolInfoOnChain (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:119:29)\n    at async RaydiumSwap.getPoolInfoByTokenPair (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:93:16)\n    at async raydiumSwap (/home/shit/hellyeabrother/dist/Raydium/raydium.js:54:26)\n    at async raydiumToken (/home/shit/hellyeabrother/dist/Raydium/raydium.js:174:13)\n    at async runTrade (/home/shit/hellyeabrother/dist/startTrade.js:198:9)\n    at async tokenBuy (/home/shit/hellyeabrother/dist/startTrade.js:124:13)\n    at async TelegramBot.<anonymous> (/home/shit/hellyeabrother/dist/router/router.start.js:553:29)","code":-32600}
+[2025-09-07T20:01:21.048Z] [WARN] [TRADE] Raydium: Pool info not found {"tokenAAddress":"So11111111111111111111111111111111111111112","tokenBAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:01:21.308Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-07T20:01:21.414Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:22.433Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:22.437Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:22.445Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:22.985Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:22.989Z] [ERROR] [TRADE] RaydiumSwap: On-chain pool discovery failed {"name":"SolanaJSONRPCError","message":"failed to get accounts owned by program 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8: Request deprioritized due to number of accounts requested. Please use getProgramAccountsV2 with pagination to handle large datasets. See: https://www.helius.dev/docs/api-reference/rpc/http/getprogramaccountsv2","stack":"SolanaJSONRPCError: failed to get accounts owned by program 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8: Request deprioritized due to number of accounts requested. Please use getProgramAccountsV2 with pagination to handle large datasets. See: https://www.helius.dev/docs/api-reference/rpc/http/getprogramaccountsv2\n    at Connection.getProgramAccounts (/home/shit/hellyeabrother/node_modules/@solana/web3.js/lib/index.cjs.js:6400:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async tryFind (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:114:30)\n    at async RaydiumSwap.getPoolInfoOnChain (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:119:29)\n    at async RaydiumSwap.getPoolInfoByTokenPair (/home/shit/hellyeabrother/dist/Raydium/RaydiumSwap.js:93:16)\n    at async raydiumSwap (/home/shit/hellyeabrother/dist/Raydium/raydium.js:54:26)\n    at async raydiumToken (/home/shit/hellyeabrother/dist/Raydium/raydium.js:174:13)\n    at async runTrade (/home/shit/hellyeabrother/dist/startTrade.js:198:9)\n    at async tokenBuy (/home/shit/hellyeabrother/dist/startTrade.js:124:13)\n    at async TelegramBot.<anonymous> (/home/shit/hellyeabrother/dist/router/router.start.js:553:29)","code":-32600}
+[2025-09-07T20:01:22.989Z] [WARN] [TRADE] Raydium: Pool info not found {"tokenAAddress":"So11111111111111111111111111111111111111112","tokenBAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:01:22.990Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:23.241Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-07T20:01:23.432Z] [ERROR] [TRADE] RaydiumSwap: get Pool info Error: Cannot create a string longer than 0x1fffffe8 characters
+[2025-09-07T20:01:24.466Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:25.496Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:32.433Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:32.433Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:32.985Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:32.986Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:40.418Z] [WARN] [TRADE] RaydiumSwap: On-chain fallback: No pool found {"mintA":"So11111111111111111111111111111111111111112","mintB":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:01:40.418Z] [WARN] [TRADE] Raydium: Pool info not found {"tokenAAddress":"So11111111111111111111111111111111111111112","tokenBAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:01:40.666Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":1,"contractAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","action":"buy","amount":"0.000015444829738316 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:00:48.613Z"},"signalNumber":1}
+[2025-09-07T20:01:40.668Z] [INFO] [TRADE] RaydiumSwap: Wallet initialized {"publicKey":"DZ2naxLU5FF98iC3ohkAbWnB3hG8E5ogRybfCQjDkk5P"}
+[2025-09-07T20:01:40.668Z] [INFO] [TRADE] Raydium: Raydium swap initialized
+[2025-09-07T20:01:40.869Z] [DEBUG] [TRADE] Price: token mint address {"address":"So11111111111111111111111111111111111111112"}
+[2025-09-07T20:01:41.725Z] [INFO] [TRADE] Raydium: tokenAPrice {"usdPrice":203.020823725}
+[2025-09-07T20:01:41.725Z] [DEBUG] [TRADE] RaydiumSwap: Using Raydium liquidity list {"url":"https://api.raydium.io/v2/sdk/liquidity/mainnet.json"}
+[2025-09-07T20:01:42.433Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:42.434Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:42.800Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:42.986Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:42.987Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:43.829Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:44.858Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:51.389Z] [WARN] [TRADE] RaydiumSwap: On-chain fallback: No pool found {"mintA":"So11111111111111111111111111111111111111112","mintB":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:01:51.389Z] [WARN] [TRADE] Raydium: Pool info not found {"tokenAAddress":"So11111111111111111111111111111111111111112","tokenBAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:01:51.662Z] [INFO] [TRADE] RunTrade: Raydium swap start {"signal":{"id":2,"contractAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","action":"buy","amount":"0.000017938408242235403 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:00:56.543Z"},"signalNumber":2}
+[2025-09-07T20:01:51.663Z] [INFO] [TRADE] RaydiumSwap: Wallet initialized {"publicKey":"DZ2naxLU5FF98iC3ohkAbWnB3hG8E5ogRybfCQjDkk5P"}
+[2025-09-07T20:01:51.663Z] [INFO] [TRADE] Raydium: Raydium swap initialized
+[2025-09-07T20:01:51.864Z] [DEBUG] [TRADE] Price: token mint address {"address":"So11111111111111111111111111111111111111112"}
+[2025-09-07T20:01:52.439Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:52.440Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:52.473Z] [INFO] [TRADE] Raydium: tokenAPrice {"usdPrice":203.128747041}
+[2025-09-07T20:01:52.473Z] [DEBUG] [TRADE] RaydiumSwap: Using Raydium liquidity list {"url":"https://api.raydium.io/v2/sdk/liquidity/mainnet.json"}
+[2025-09-07T20:01:52.988Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:01:52.989Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:01:53.568Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:54.598Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:01:55.639Z] [ERROR] [TRADE] RaydiumSwap: get Pool info AxiosError: Request failed with status code 429
+[2025-09-07T20:02:02.439Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:02.440Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:02.889Z] [WARN] [TRADE] RaydiumSwap: On-chain fallback: No pool found {"mintA":"So11111111111111111111111111111111111111112","mintB":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:02:02.889Z] [WARN] [TRADE] Raydium: Pool info not found {"tokenAAddress":"So11111111111111111111111111111111111111112","tokenBAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump"}
+[2025-09-07T20:02:02.989Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:02.990Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:03.152Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-07T20:02:12.440Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:12.441Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:12.989Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:12.990Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:22.440Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:22.441Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:22.990Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:22.991Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:32.443Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:32.444Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:32.991Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:32.992Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:42.444Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:42.445Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:42.992Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:42.992Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:52.444Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:52.445Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:02:52.993Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:02:52.993Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:03:02.444Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:03:02.445Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:03:02.994Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:03:02.995Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:03:12.452Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:03:12.454Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:03:12.995Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:03:12.995Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:03:22.460Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:03:22.461Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:03:22.995Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:03:22.996Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:22:18.317Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","isAddress":0}
+[2025-09-07T20:22:18.317Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.000036769277861740215,"action":"buy"}
+[2025-09-07T20:22:18.321Z] [INFO] [TRADE] Router: Auto Buy triggered {"token":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","amount":0.000036769277861740215}
+[2025-09-07T20:22:18.322Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-07T20:22:18.323Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0],"length":1}
+[2025-09-07T20:22:18.324Z] [INFO] [TRADE] RunTrade: Swap start {"signal":{"id":0,"contractAddress":"6K3ST3XiU1H9jWzuQ9rYq6ZmyE3g3gSpRrfeFBYbpump","action":"buy","amount":"0.000036769277861740215 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:22:18.321Z"},"signalNumber":0}
+[2025-09-07T20:22:18.324Z] [INFO] [TRADE] RunTrade: Using Jupiter swap engine
+[2025-09-07T20:22:18.591Z] [INFO] [TRADE] Jupiter: Requesting quote
+[2025-09-07T20:22:19.283Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-07T20:22:22.041Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:22:22.042Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:22:32.046Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:22:32.047Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:22:42.049Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:22:42.050Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:22:52.051Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:22:52.052Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:23:02.052Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:23:02.052Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:23:12.052Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:23:12.053Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:23:22.053Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:23:22.054Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:23:32.053Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:23:32.053Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:23:42.053Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:23:42.054Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:23:52.063Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:23:52.064Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:24:02.072Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:24:02.073Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:24:12.087Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:24:12.088Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:24:22.096Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:24:22.097Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:24:32.102Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:24:32.103Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:24:42.111Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:24:42.112Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:24:52.118Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:24:52.119Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:25:02.125Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:25:02.125Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:25:12.132Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:25:12.132Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:25:22.139Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:25:22.139Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:25:32.144Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:25:32.145Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:25:42.147Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:25:42.147Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:25:52.152Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:25:52.153Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:26:02.155Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:26:02.156Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:26:12.159Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:26:12.160Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:26:22.174Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:26:22.174Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:26:32.177Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:26:32.178Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:26:42.179Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:26:42.180Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:26:52.184Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:26:52.189Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:27:02.186Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:27:02.186Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:27:12.187Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:27:12.187Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:27:22.189Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:27:22.190Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:27:32.190Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:27:32.190Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:27:42.190Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:27:42.191Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:27:52.191Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:27:52.192Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:28:02.191Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:28:02.192Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:28:12.201Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:28:12.202Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:28:22.207Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:28:22.208Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:28:32.218Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:28:32.219Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:28:42.226Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:28:42.227Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:28:52.235Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:28:52.236Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:29:02.243Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:29:02.244Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:29:12.250Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:29:12.251Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:29:22.254Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:29:22.255Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:29:32.263Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:29:32.264Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:29:42.270Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:29:42.270Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:29:52.275Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:29:52.276Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:30:02.280Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:30:02.281Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:30:12.286Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:30:12.286Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:30:22.288Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:30:22.288Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:30:32.290Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:30:32.291Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:30:42.297Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:30:42.298Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:30:52.300Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:30:52.301Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:31:02.300Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:31:02.300Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:31:12.304Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:31:12.305Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:31:22.305Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:31:22.306Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:31:32.307Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:31:32.308Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:31:42.312Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:31:42.313Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:31:52.312Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:31:52.313Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:32:02.312Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:32:02.314Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:32:12.322Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:32:12.327Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:32:22.333Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:32:22.333Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:32:32.341Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:32:32.342Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:32:42.348Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:32:42.351Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:32:52.358Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:32:52.359Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:33:02.365Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:33:02.366Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:33:12.373Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:33:12.373Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:33:22.380Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:33:22.381Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:33:32.387Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:33:32.388Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:33:42.394Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:33:42.394Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:33:52.395Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:33:52.396Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:34:02.400Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:34:02.401Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:34:12.405Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:34:12.406Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:34:22.416Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:34:22.417Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:34:32.420Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:34:32.421Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:34:42.424Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:34:42.425Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:34:52.426Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:34:52.427Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:35:02.430Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:35:02.431Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:35:12.433Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:35:12.433Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:35:22.434Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:35:22.435Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:35:32.437Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:35:32.437Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:35:42.438Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:35:42.439Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:35:52.439Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:35:52.440Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:36:02.440Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:36:02.441Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:36:12.441Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:36:12.442Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:36:22.441Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:36:22.441Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:36:32.457Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:36:32.458Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:36:42.466Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:36:42.467Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:36:52.475Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:36:52.476Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:37:02.479Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:37:02.480Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:37:12.488Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:37:12.489Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:37:22.492Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:37:22.493Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:37:32.496Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:37:32.497Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:37:42.504Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:37:42.505Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:37:52.509Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:37:52.510Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:38:02.511Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:38:02.512Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:38:12.518Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:38:12.519Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:38:22.520Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:38:22.521Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:38:32.520Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:38:32.521Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:38:42.529Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:38:42.530Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:38:52.532Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:38:52.532Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:39:02.532Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:39:02.533Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:39:12.537Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:39:12.538Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:39:22.539Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:39:22.540Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:47:16.326Z] [INFO] [TRADE] JupiterTest: Starting test swap {"mint":"FH92SMAdri2SYzxUvYF6f7PxURjeaj9GWJQUZ8VUe2EU","sol":0.001}
+[2025-09-07T20:47:16.724Z] [INFO] [TRADE] Jupiter: Requesting quote
+[2025-09-07T20:49:37.137Z] [INFO] [TRADE] JupiterTest: Starting test swap {"mint":"FH92SMAdri2SYzxUvYF6f7PxURjeaj9GWJQUZ8VUe2EU","sol":0.001}
+[2025-09-07T20:49:37.437Z] [INFO] [TRADE] Jupiter: Requesting quote
+[2025-09-07T20:50:37.935Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:50:37.937Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:50:44.314Z] [DEBUG] [TRADE] Signals: verifyAddress {"tokenAddress":"FH92SMAdri2SYzxUvYF6f7PxURjeaj9GWJQUZ8VUe2EU","isAddress":0}
+[2025-09-07T20:50:44.315Z] [INFO] [TRADE] Signals: Insert solana signal {"tokenAddress":"FH92SMAdri2SYzxUvYF6f7PxURjeaj9GWJQUZ8VUe2EU","amount":0.00004400673360506065,"action":"buy"}
+[2025-09-07T20:50:44.315Z] [INFO] [TRADE] Router: Auto Buy triggered {"token":"FH92SMAdri2SYzxUvYF6f7PxURjeaj9GWJQUZ8VUe2EU","amount":0.00004400673360506065}
+[2025-09-07T20:50:44.315Z] [INFO] [TRADE] Buy: Starting token buy cycle
+[2025-09-07T20:50:44.315Z] [DEBUG] [TRADE] Buy: Current signal state {"list":[0],"length":1}
+[2025-09-07T20:50:44.316Z] [INFO] [TRADE] RunTrade: Swap start {"signal":{"id":0,"contractAddress":"FH92SMAdri2SYzxUvYF6f7PxURjeaj9GWJQUZ8VUe2EU","action":"buy","amount":"0.00004400673360506065 SOL","platform":"raydium","chain":"solana","timestamp":"2025-09-07T20:50:44.315Z"},"signalNumber":0}
+[2025-09-07T20:50:44.316Z] [INFO] [TRADE] RunTrade: Using Jupiter swap engine
+[2025-09-07T20:50:44.577Z] [INFO] [TRADE] Jupiter: Requesting quote
+[2025-09-07T20:50:45.530Z] [INFO] [TRADE] Buy: Signal batch finished
+[2025-09-07T20:50:47.935Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:50:47.936Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:50:57.938Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:50:57.939Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:51:07.941Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:51:07.942Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:51:17.949Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:51:17.950Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:51:27.958Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:51:27.959Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:51:37.966Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:51:37.967Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:51:47.974Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:51:47.975Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:51:57.981Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:51:57.981Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:52:07.988Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:52:07.989Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:52:17.993Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:52:17.994Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:52:28.000Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:52:28.000Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:52:38.005Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:52:38.006Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:52:48.011Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:52:48.015Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:52:58.016Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:52:58.017Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:53:08.019Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:53:08.020Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:53:18.022Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:53:18.023Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:53:28.026Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:53:28.027Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:53:38.029Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:53:38.030Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:53:48.032Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:53:48.033Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:53:58.034Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:53:58.035Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:54:08.036Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:54:08.037Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:54:18.040Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:54:18.041Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:54:28.042Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:54:28.043Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:54:38.042Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:54:38.043Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:54:48.042Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:54:48.043Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:54:58.052Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:54:58.052Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:55:08.059Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:55:08.060Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:55:18.068Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:55:18.069Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:55:28.075Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:55:28.076Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:55:38.082Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:55:38.083Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:55:48.091Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:55:48.091Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:55:58.098Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:55:58.099Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:56:08.098Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:56:08.099Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:56:18.103Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:56:18.104Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:56:28.110Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:56:28.111Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:56:38.116Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:56:38.117Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:56:48.122Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:56:48.123Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:56:58.129Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:56:58.129Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:57:08.133Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:57:08.134Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:57:18.135Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:57:18.136Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:57:28.139Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:57:28.140Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:57:38.143Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:57:38.144Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:57:48.146Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:57:48.147Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:57:58.148Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:57:58.149Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:58:08.150Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:58:08.151Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:58:18.152Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:58:18.153Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:58:28.154Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:58:28.155Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:58:38.155Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:58:38.156Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:58:48.155Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:58:48.156Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:58:58.155Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:58:58.156Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:59:08.165Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:59:08.166Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:59:18.173Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:59:18.174Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:59:28.177Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:59:28.178Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:59:38.187Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:59:38.188Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:59:48.195Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:59:48.196Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T20:59:58.200Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T20:59:58.201Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:00:08.207Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:00:08.208Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:00:18.216Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:00:18.217Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:00:28.221Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:00:28.222Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:00:38.226Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:00:38.227Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:00:48.233Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:00:48.234Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:00:58.239Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:00:58.240Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:01:08.244Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:01:08.244Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:01:18.283Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:01:18.284Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:01:28.287Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:01:28.288Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:01:38.290Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:01:38.291Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:01:48.298Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:01:48.299Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:01:58.301Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:01:58.314Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:02:08.302Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:02:08.302Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:02:18.303Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:02:18.303Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:02:28.304Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:02:28.305Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:02:38.305Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:02:38.306Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:02:48.307Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:02:48.307Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:02:58.307Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:02:58.308Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:03:08.307Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:03:08.308Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:03:18.316Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:03:18.318Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:03:28.326Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:03:28.327Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:03:38.336Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:03:38.337Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:03:48.345Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:03:48.346Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:03:58.356Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:03:58.356Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:04:08.363Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:04:08.364Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:04:18.371Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:04:18.372Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:04:28.378Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:04:28.379Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:04:38.385Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:04:38.386Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:04:48.391Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:04:48.392Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:04:58.397Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:04:58.398Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:05:08.403Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:05:08.404Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:05:18.408Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:05:18.409Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:05:28.412Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:05:28.413Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:05:38.419Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:05:38.420Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:05:48.424Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:05:48.424Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:05:58.426Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:05:58.427Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:06:08.430Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:06:08.431Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:06:18.431Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:06:18.432Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:06:28.434Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:06:28.435Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:06:38.436Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:06:38.437Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:06:48.437Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:06:48.439Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:06:58.848Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:06:58.849Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:07:08.849Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:07:08.853Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:07:18.849Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:07:18.850Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:07:28.850Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:07:28.851Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:07:38.861Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:07:38.862Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:07:48.868Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:07:48.869Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:07:58.886Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:07:58.887Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:08:08.894Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:08:08.895Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
+[2025-09-07T21:08:18.900Z] [INFO] [TRADE] Sell: Starting token sell cycle
+[2025-09-07T21:08:18.901Z] [DEBUG] [TRADE] Sell: Fetched buy history {"count":0}
